@@ -6,10 +6,10 @@ import router from './router'
 import { focusOnMount } from './directives'
 
 async function prepare() {
-  if (import.meta.env.DEV) {
-    const { default: msw } = await import('./sw/msw')
-    await msw.start()
-  }
+  // if (import.meta.env.DEV) {
+  //   const { default: msw } = await import('./sw/msw')
+  //   await msw.start()
+  // }
 }
 
 const app = createApp(App)

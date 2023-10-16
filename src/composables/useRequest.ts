@@ -1,4 +1,4 @@
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch, type Ref } from 'vue'
 
 type Unpromise<T extends Promise<any>> = T extends Promise<infer U> ? U : never
 
@@ -17,12 +17,7 @@ export default function useRequest<TRequestFn extends (...args: any) => any, TRe
   const isError = computed(() => Boolean(error))
   const result = ref<Unpromise<ReturnType<TRequestFn>>>()
 
-  onMounted(() => {
-    if (options.fetchOnMount) {
-      wrappedFetcher()
-    }
-  })
-
+  
   const wrappedFetcher = (
     args?: any,
     requestOptions?: {
@@ -46,7 +41,7 @@ export default function useRequest<TRequestFn extends (...args: any) => any, TRe
   }
 
   return {
-    fetch: wrappedFetcher as TRequestFn,
+    exec: wrappedFetcher as TRequestFn,
     result: result,
     isLoading,
     isError,

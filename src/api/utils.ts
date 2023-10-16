@@ -1,17 +1,19 @@
-import axios from 'axios'
+import axios, { type GenericAbortSignal } from 'axios'
 import { ONE_API_ROOT_URL } from './constants'
 
 const _axios = axios.create({
   baseURL: ONE_API_ROOT_URL
 })
 
-async function request<T>(props: {
+export async function request<T>(props: {
   method?: 'POST' | 'GET'
   body?: any
   url?: string
   params?: any
+  signal?: GenericAbortSignal
 }) {
   const x = await _axios({
+    signal: props.signal,
     method: props.method,
     data: props.body,
     url: props.url || '/',
@@ -21,4 +23,3 @@ async function request<T>(props: {
   return x.data as T
 }
 
-export default request
