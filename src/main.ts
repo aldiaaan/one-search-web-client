@@ -3,6 +3,7 @@ import './assets/tailwind.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { VueQueryPlugin } from "@tanstack/vue-query";
 import { focusOnMount } from './directives'
 
 async function prepare() {
@@ -15,6 +16,7 @@ async function prepare() {
 const app = createApp(App)
 
 app.use(router)
+app.use(VueQueryPlugin)
 
 app.directive('focusOnMount', focusOnMount)
 

@@ -20,6 +20,8 @@ export async function request<T>(props: {
     params: props.params || {}
   })
 
+  console.log(x)
+
   return x.data as T
 }
 

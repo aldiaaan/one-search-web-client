@@ -32,3 +32,5 @@ export class NotFoundException extends ClientException {
     })
   }
 }
+
+export class InvalidCredentialException extends ClientException {}
