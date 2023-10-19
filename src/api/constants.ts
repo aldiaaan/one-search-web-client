@@ -6,5 +6,8 @@ export const Endpoints = Object.freeze({
   DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains/xx',
   SEARCH: ONE_API_ROOT_URL + '/api/v1.0/overall_ranking/similarity',
   WEBPAGES: ONE_API_ROOT_URL + '/api/v1.0/webpages',
-  SIGN_IN: ONE_API_ROOT_URL + '/api/v1.0/auth/login'
+  SIGN_IN: ONE_API_ROOT_URL + '/api/v1.0/auth/login',
+  USERS: ONE_API_ROOT_URL + '/api/v1.0/accounts/',
+  DELETE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/<id>/delete/',
+  CREATE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/create'
 })

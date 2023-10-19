@@ -3,6 +3,8 @@ import WebSearchView from '@/views/WebSearchView.vue'
 import WebSearchResultView from '@/views/WebSearchResultView.vue'
 import StaffLoginView from '@/views/StaffLoginView.vue'
 import DashboardView from '@/views/dashboard/DashboardView.vue'
+import DashboardStaffListView from '@/views/dashboard/staff/StaffListView.vue'
+import AddStaffView from '@/views/dashboard/staff/AddStaffView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +27,19 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'DashbaordView',
-      component: DashboardView
+      component: DashboardView,
+      children: [
+        {
+          path: '/dashboard/staff',
+          name: 'DashboardStaffListView',
+          component: DashboardStaffListView
+        },
+        {
+          path: '/dashboard/staff/add',
+          name: 'AddStaffView',
+          component: AddStaffView
+        }
+      ]
     }
   ]
 })

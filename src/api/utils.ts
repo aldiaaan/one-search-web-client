@@ -6,18 +6,26 @@ const _axios = axios.create({
 })
 
 export async function request<T>(props: {
-  method?: 'POST' | 'GET'
+  method?: 'POST' | 'GET' | 'DELETE'
   body?: any
   url?: string
   params?: any
   signal?: GenericAbortSignal
 }) {
+  const authToken = localStorage.getItem('user-auth-token')
+  const headers = {}
+
+  if (authToken) {
+    Object.assign(headers, { 'X-Auth-Token': authToken })
+  }
+
   const x = await _axios({
     signal: props.signal,
     method: props.method,
     data: props.body,
     url: props.url || '/',
-    params: props.params || {}
+    params: props.params || {},
+    headers
   })
 
   console.log(x)
@@ -25,3 +33,12 @@ export async function request<T>(props: {
   return x.data as T
 }
 
+export function delay<T = any>(data?: T, time: number = 500): Promise<T> {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      if (data) {
+        resolve(data)
+      }
+    }, time)
+  ) as Promise<T>
+}

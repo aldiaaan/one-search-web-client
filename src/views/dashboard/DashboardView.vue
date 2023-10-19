@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OneSidebar from '@/components/OneSidebar'
 import GridIcon from '@/assets/icons/grid.svg'
+import UserIcon from '@/assets/icons/user.svg'
 import { RouterView } from 'vue-router'
 
 const navs = [
@@ -12,6 +13,11 @@ const navs = [
         to: "/dashboard",
         icon: GridIcon
       },
+      {
+        title: "Staff",
+        to: "/dashboard/staff",
+        icon: UserIcon
+      },
     ]
   },
 ]
@@ -21,8 +27,10 @@ const navs = [
 <template>
   <div class="h-screen flex">
     <OneSidebar :navs="navs" class="flex-shrink-0" />
-    <div class="flex-1 ">
-      <RouterView></RouterView>
+    <div class="flex-1 h-screen bg-gray-50 relative bg-opacity-50">
+      <div class="w-full h-full overflow-auto">
+        <RouterView></RouterView>
+      </div>
     </div>
   </div>
 </template>
