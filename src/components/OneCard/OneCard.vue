@@ -7,7 +7,7 @@ defineOptions({
 </script>
 
 <template>
-  <div class="border-gray-200 bg-white border rounded-lg">
+  <div class="border-gray-200 bg-white border overflow-hidden rounded-lg">
     <slot />
   </div>
 </template>

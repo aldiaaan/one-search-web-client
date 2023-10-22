@@ -25,7 +25,7 @@ onMounted(() => {
 
 </script>
 <template>
-  <div>
+  <div class="h-full w-full">
     <div v-if="isError" class="h-full w-full flex items-center justify-center bg-gray-200">
       <BrokenImageIcon class="text-gray-500" />
     </div>

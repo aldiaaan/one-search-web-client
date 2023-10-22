@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OneSidebar from '@/components/OneSidebar'
 import GridIcon from '@/assets/icons/grid.svg'
+import LayersIcon from '@/assets/icons/layers.svg'
 import UserIcon from '@/assets/icons/user.svg'
 import { RouterView } from 'vue-router'
 
@@ -17,6 +18,15 @@ const navs = [
         title: "Staff",
         to: "/dashboard/staff",
         icon: UserIcon
+      },
+    ]
+  }, {
+    title: "Services",
+    routes: [
+      {
+        title: "Document Ranking",
+        to: "/dashboard/services/document-ranking",
+        icon: LayersIcon
       },
     ]
   },

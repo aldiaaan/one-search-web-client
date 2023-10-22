@@ -19,5 +19,9 @@ export default function useQueryOptions(data: { perPage?: number } = { perPage: 
     })
   })
 
+  watch([perPage, query], () => {
+    page.value = 0
+  })
+
   return { page, perPage, query }
 }

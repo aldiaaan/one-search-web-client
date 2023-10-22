@@ -16,8 +16,10 @@ const props = withDefaults(defineProps<{
   isLoading?: boolean;
   headerOptions?: {
     variant?: 'filled' | 'not-filled'
-  }
+  },
+  cellHeight?: number
 }>(), {
+  cellHeight: 48,
   headers: () => [],
   items: () => [],
   isLoading: false,
@@ -42,7 +44,7 @@ function getTableRowClasses(options: {
 }) {
   const { disableGutter = false } = options
 
-  const classes = ['text-sm', 'h-12'];
+  const classes = ['text-sm'];
 
   if (!disableGutter) {
     classes.push('px-6')
@@ -65,7 +67,7 @@ function getTableRowClasses(options: {
     <tbody v-if="!isLoading">
 
       <tr v-for="item, index in items" :key="index" class="border-b border-gray-100">
-        <td :width="headers?.find(header => header.key === key)?.width" :key="key"
+        <td :style="{ height: `${cellHeight}px` }" :width="headers?.find(header => header.key === key)?.width" :key="key"
           v-for="key in headers?.map(header => header.key)" :class="getTableRowClasses({
             disableGutter: Boolean(headers?.find(header => header.disableGutter && header.key === key))
           })">
@@ -80,7 +82,7 @@ function getTableRowClasses(options: {
 
     <tbody v-else>
       <tr v-for="_, index in 10" :key="index" class="border-b border-gray-100">
-        <td :width="headers?.find(header => header.key === key)?.width" :key="key"
+        <td :style="{ height: `${cellHeight}px` }" :width="headers?.find(header => header.key === key)?.width" :key="key"
           v-for="key in headers?.map(header => header.key)" :class="getTableRowClasses({
             disableGutter: Boolean(headers?.find(header => header.disableGutter && header.key === key))
           })">
