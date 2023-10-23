@@ -5,8 +5,11 @@ import OneTablePagination from '@/components/OneTablePagination';
 import { useQueryOptions } from '@/composables';
 import { Webpage } from '@/models';
 import { useQuery } from '@tanstack/vue-query';
+import { useRouter } from 'vue-router';
 
 const { page, perPage, query } = useQueryOptions()
+
+const router = useRouter()
 
 const { data, isLoading, isError } = useQuery({
   queryFn: async () => {
@@ -16,7 +19,7 @@ const { data, isLoading, isError } = useQuery({
       query: query.value
     })
   },
-  queryKey: [page, perPage, query]
+  queryKey: [page, perPage, query, 'documents']
 })
 
 const headers = [{
@@ -35,7 +38,12 @@ const headers = [{
     <OneCard>
       <OneTable :cell-height="64" :headers="headers" :is-loading="isLoading" :items="data?.webpages">
         <template #url="{ item }: { item: Webpage }">
-          <div class=" flex items-center">
+          <div role="button" @click="() => router.push({
+            path: '/dashboard/documents',
+            query: {
+              url: item.url
+            }
+          })" class=" flex cursor-pointer items-center">
             <div>
               <p class="font-semibold">{{ item.title }}</p>
               <p class="text-sm text-gray-500">{{ item.url }}</p>

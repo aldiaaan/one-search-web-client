@@ -3,9 +3,10 @@ import OneMetrics from '@/components/OneMetrics'
 import OneTable from '@/components/OneTable';
 import OneImage from '@/components/OneImage';
 import OneCard from '@/components/OneCard';
+import OneServiceMetrics from '@/components/OneServiceMetrics';
 import { useQueryOptions } from '@/composables';
-import { Word } from '@/models';
-import { useQuery } from '@tanstack/vue-query';
+import { DocumentRankingService, Webpage, Word } from '@/models';
+import { useMutation, useQuery } from '@tanstack/vue-query';
 import { Endpoints } from '@/api';
 
 const { page, perPage, query } = useQueryOptions({
@@ -21,7 +22,50 @@ const { data, isLoading, isError } = useQuery({
       query: query.value
     })
   },
-  queryKey: [page, perPage, query]
+  queryKey: [page, perPage, query, 'most-searched']
+})
+
+const { mutate: startDocumentRanking, isLoading: isLoadingDocumentRanking, isError: isErrorDocumentRanking } = useMutation({
+  mutationFn: async () => {
+    return DocumentRankingService.start()
+  },
+  onSettled: () => {
+    refetchDocumentRankingStatus()
+  }
+})
+
+const { data: totalWords, isLoading: isLoadingTotalWords } = useQuery({
+  queryFn: async () => {
+    const x = await Word.find()
+
+    return x.pagination.total
+  },
+  queryKey: ['words-total']
+})
+
+const { data: totalDocuments, isLoading: isLoadingTotalDocuments } = useQuery({
+  queryFn: async () => {
+    const x = await Webpage.find()
+
+    return x.pagination.total
+  },
+  queryKey: ['documents-total']
+})
+
+
+const { mutate: stopDocumentRanking, isLoading: isLoadingStopDocumentRanking, isError: isErrorStopDocumentRanking } = useMutation({
+  mutationFn: async () => {
+    return DocumentRankingService.stop()
+  },
+  onSettled: () => {
+    refetchDocumentRankingStatus()
+  }
+})
+
+const { data: documentRankingStatus, isLoading: isLoadingDocumentRankingStatus, isError: isErrorDocumentRankingStatus, refetch: refetchDocumentRankingStatus } = useQuery({
+  queryFn: () => {
+    return DocumentRankingService.status()
+  }
 })
 
 const headers = [{
@@ -44,6 +88,12 @@ const headers = [{
 
     <div class="grid grid-cols-3 gap-6">
       <div class="col-span-2 flex flex-col gap-6">
+        <OneServiceMetrics @stop="stopDocumentRanking" :is-running="documentRankingStatus?.service.status === 'RUNNING'"
+          @start="startDocumentRanking" :is-loading="isLoadingDocumentRanking || isLoadingStopDocumentRanking"
+          name="Document Ranking Service" :highlights="[{
+            title: 'Algorithm',
+            value: 'TF-IDF'
+          }]"></OneServiceMetrics>
         <div class="border border-gray-200 rounded-lg  bg-white">
           <div class="flex justify-between items-center h-16 px-6 border-b border-gray-200">
             <p class="font-semibold tracking-tight text-sm">Most Searched Keywords</p>
@@ -62,10 +112,11 @@ const headers = [{
             <OneImage :src="Endpoints.WORDCLOUD"></OneImage>
           </div>
         </OneCard>
+
       </div>
       <div class="flex flex-col gap-6">
-        <one-metrics title="Unique Words" :value="9999" icon="message-circle"></one-metrics>
-        <one-metrics title="Documents" :value="9999" icon="bookmark"></one-metrics>
+        <OneMetrics title="Unique Words" :value="totalWords" :is-loading="isLoadingTotalWords"></OneMetrics>
+        <OneMetrics title="Documents" :value="totalDocuments" :is-loading="isLoadingTotalWords"></OneMetrics>
       </div>
     </div>
   </div>

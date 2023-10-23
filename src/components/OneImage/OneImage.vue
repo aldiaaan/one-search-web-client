@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import BrokenImageIcon from '@/assets/icons/x.svg'
 
 
-const props = withDefaults(defineProps<{ src?: string, mode?: "cover" | "fill" }>(), {
+const props = withDefaults(defineProps<{ src?: string, mode?: "cover" | "fill" | "contain" }>(), {
   src: () => "",
   mode: () => "cover"
 })
@@ -31,6 +31,6 @@ onMounted(() => {
     </div>
     <div v-if="isLoading" class="h-full w-full bg-gray-200 animate-pulse" />
     <img ref="image" v-if="!isError" :src="props.src" class="h-full w-full"
-      :class="{ 'hidden': isLoading && !isError, 'object-cover': props.mode === 'cover' }" />
+      :class="{ 'hidden': isLoading && !isError, 'object-cover': props.mode === 'cover', 'contain': $props.mode === 'contain' }" />
   </div>
 </template>

@@ -40,6 +40,7 @@ export class Webpage {
         title: string
         total_words: number
         url: string
+        id: string
       }[]
       pagination: {
         current_page: number
@@ -62,7 +63,8 @@ export class Webpage {
         (d) =>
           new Webpage({
             url: d.url,
-            title: d.title
+            title: d.title,
+            id: d.id
           })
       ),
       pagination: new Pagination({

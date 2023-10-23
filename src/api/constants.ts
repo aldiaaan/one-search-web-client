@@ -13,5 +13,10 @@ export const Endpoints = Object.freeze({
   SEARCH_LOGS: ONE_API_ROOT_URL + '/api/v1.0/analytics/search_logs',
   WORDS: ONE_API_ROOT_URL + '/api/v1.0/words/',
   WORDCLOUD: ONE_API_ROOT_URL + '/api/v1.0/words/wordclouds',
+  WORD_OCCURRENCES: ONE_API_ROOT_URL + '/api/v1.0/words/occurrences',
+  DOCUMENT_WORD_CLOUDS: ONE_API_ROOT_URL + '/api/v1.0/words/wordclouds',
+  DOCUMENT_RANKING_START: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/start',
+  DOCUMENT_RANKING_STOP: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/stop',
+  DOCUMENT_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/status',
   MOST_SEARCHED_WORDS: ONE_API_ROOT_URL + '/api/v1.0/analytics/top_searched_words'
 })

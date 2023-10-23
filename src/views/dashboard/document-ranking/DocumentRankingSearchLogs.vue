@@ -19,7 +19,7 @@ const { data, isLoading, isError } = useQuery({
       query: query.value
     })
   },
-  queryKey: [page, perPage, query]
+  queryKey: [page, perPage, query, 'search-logs']
 })
 
 const headers = [{

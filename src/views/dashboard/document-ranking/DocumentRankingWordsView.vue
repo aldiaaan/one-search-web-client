@@ -80,9 +80,22 @@ const headers = [{
         </OneSelect>
       </div>
       <OneTable :is-loading="isLoading" :items="data?.words" :headers="headers">
+
+        <template #value="{ item }">
+          <div role="button" @click="() => router.push({
+            path: `/dashboard/words`,
+            query: {
+              word: item.value
+            }
+          })" class="cursor pointer">
+            {{ item.value }}
+          </div>
+        </template>
       </OneTable>
       <div class="px-6 py-4 flex justify-end">
-        <OneTablePagination v-model="page" :per-page="perPage" :total="data?.pagination.total" />
+        <OneTablePagination v-model="page" :per-page="perPage" :total="data?.pagination.total">
+
+        </OneTablePagination>
 
       </div>
     </OneCard>

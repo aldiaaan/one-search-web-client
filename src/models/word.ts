@@ -1,6 +1,7 @@
 import { Endpoints, request } from '@/api'
 import type { CommonRequestOptions } from './types'
 import { Pagination } from './pagination'
+import { Webpage } from '.'
 
 export type WordArgs = {
   value?: string
@@ -14,7 +15,47 @@ export class Word {
     Object.assign(this, args)
   }
 
-  static async getWordClouds() {
+  static async getOccurrences(options: CommonRequestOptions & { word?: string } = {}) {
+    const { page = 0, perPage = 20, query, resolves, sorts, word } = options
+
+    const { data, pagination } = await request<{
+      data: {
+        description: string
+        id: string | number
+        tfidf_score: number
+        title: string
+        url: string
+      }[]
+      pagination: {
+        total: number
+        pages: number
+      }
+    }>({
+      body: {},
+      method: 'GET',
+      params: {
+        word
+      },
+      url: Endpoints.WORD_OCCURRENCES
+    })
+
+    return {
+      webpages: data.map(
+        (d) =>
+          new Webpage({
+            description: d.description,
+            id: d.id as string,
+            title: d.title,
+            url: d.url
+          })
+      ),
+      pagination: new Pagination({
+        page,
+        perPage,
+        total: pagination.total,
+        pages: pagination.pages
+      })
+    }
   }
 
   static async find(options: CommonRequestOptions = {}) {
