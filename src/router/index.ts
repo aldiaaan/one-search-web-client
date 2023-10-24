@@ -10,8 +10,12 @@ import DocumentRankingOverviewView from '@/views/dashboard/document-ranking/Docu
 import DocumentRankingSearchLogs from '@/views/dashboard/document-ranking/DocumentRankingSearchLogs.vue'
 import DocumentRankingDocumentsView from '@/views/dashboard/document-ranking/DocumentRankingDocumentsView.vue'
 import DocumentRankingWordsView from '@/views/dashboard/document-ranking/DocumentRankingWordsView.vue'
-import DocumentDetailView from '@/views/dashboard/DocumentDetailView.vue';
+import DocumentDetailView from '@/views/dashboard/DocumentDetailView.vue'
 import WordDetailView from '@/views/dashboard/WordDetailView.vue'
+import CrawlingDocumentsView from '@/views/dashboard/crawling/CrawlingDocumentsView.vue'
+import CrawlingDomainsView from '@/views/dashboard/crawling/CrawlingDomainsView.vue'
+import CrawlingOverviewView from '@/views/dashboard/crawling/CrawlingOverviewView.vue'
+import CrawlingView from '@/views/dashboard/crawling/CrawlingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,13 +43,34 @@ const router = createRouter({
         {
           path: '/dashboard/documents',
           component: DocumentDetailView
-        },{
+        },
+        {
           path: '/dashboard/words',
           component: WordDetailView
         },
         {
           path: '/dashboard/words',
           component: WordDetailView
+        },
+        {
+          path: '/dashboard/services/crawling',
+          name: 'Crawling',
+          redirect: '/dashboard/services/crawling/overview',
+          component: CrawlingView,
+          children: [
+            {
+              path: '/dashboard/services/crawling/overview',
+              component: CrawlingOverviewView
+            },
+            {
+              path: '/dashboard/services/crawling/domains',
+              component: CrawlingDomainsView
+            },
+            {
+              path: '/dashboard/services/crawling/documents',
+              component: CrawlingDocumentsView
+            }
+          ]
         },
         {
           path: '/dashboard/services/document-ranking',

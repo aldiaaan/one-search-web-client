@@ -3,7 +3,7 @@ import { isDev } from '@/utils'
 export const ONE_API_ROOT_URL = isDev() ? 'http://localhost:8080' : 'https://localhost:8080'
 
 export const Endpoints = Object.freeze({
-  DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains',
+  DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains/',
   SEARCH: ONE_API_ROOT_URL + '/api/v1.0/overall_ranking/similarity',
   WEBPAGES: ONE_API_ROOT_URL + '/api/v1.0/webpages/',
   SIGN_IN: ONE_API_ROOT_URL + '/api/v1.0/auth/login',
@@ -18,5 +18,9 @@ export const Endpoints = Object.freeze({
   DOCUMENT_RANKING_START: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/start',
   DOCUMENT_RANKING_STOP: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/stop',
   DOCUMENT_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/document_ranking/status',
-  MOST_SEARCHED_WORDS: ONE_API_ROOT_URL + '/api/v1.0/analytics/top_searched_words'
+  MOST_SEARCHED_WORDS: ONE_API_ROOT_URL + '/api/v1.0/analytics/top_searched_words',
+  CRAWLING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/crawling/metrics',
+  CRAWLING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/crawling/status',
+  CRAWLING_START: ONE_API_ROOT_URL + '/api/v1.0/crawling/start',
+  CRAWLING_STOP: ONE_API_ROOT_URL + '/api/v1.0/crawling/stop'
 })

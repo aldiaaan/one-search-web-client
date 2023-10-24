@@ -7,10 +7,12 @@ specifiers:
   '@tsconfig/node18': ^18.2.2
   '@types/node': ^18.17.15
   '@types/qs': ^6.9.8
+  '@types/randomcolor': ^0.5.8
   '@vitejs/plugin-vue': ^4.3.4
   '@vue/eslint-config-prettier': ^8.0.0
   '@vue/eslint-config-typescript': ^12.0.0
   '@vue/tsconfig': ^0.4.0
+  apexcharts: ^3.44.0
   autoprefixer: ^10.4.15
   axios: ^1.5.0
   cypress: ^13.2.0
@@ -22,6 +24,7 @@ specifiers:
   postcss: ^8.4.29
   prettier: ^3.0.3
   qs: ^6.11.2
+  randomcolor: ^0.6.2
   start-server-and-test: ^2.0.0
   tailwindcss: ^3.3.3
   typescript: ~5.1.6
@@ -29,24 +32,31 @@ specifiers:
   vite-plugin-svgr: ^3.2.0
   vite-svg-loader: ^4.0.0
   vue: ^3.3.4
+  vue-apexcharts: ^1.6.2
   vue-router: ^4.2.4
   vue-tsc: ^1.8.11
+  vue3-apexcharts: ^1.4.4
 
 dependencies:
   '@headlessui/vue': 1.7.16_vue@3.3.4
   '@tanstack/vue-query': 4.37.0_vue@3.3.4
+  apexcharts: 3.44.0
   axios: 1.5.0
   msw: 1.3.1_typescript@5.1.6
   qs: 6.11.2
+  randomcolor: 0.6.2
   vite-plugin-svgr: 3.2.0_vxtpzrd3ijvkhh2fvnu2mlkwnm
   vue: 3.3.4
+  vue-apexcharts: 1.6.2_apexcharts@3.44.0
   vue-router: 4.2.4_vue@3.3.4
+  vue3-apexcharts: 1.4.4_z7yilf4cohxnj355khofvcox6q
 
 devDependencies:
   '@rushstack/eslint-patch': 1.3.3
   '@tsconfig/node18': 18.2.2
   '@types/node': 18.17.15
   '@types/qs': 6.9.8
+  '@types/randomcolor': 0.5.8
   '@vitejs/plugin-vue': 4.3.4_vite@4.4.9+vue@3.3.4
   '@vue/eslint-config-prettier': 8.0.0_celo3ywbkwugusnwrip6fhdozu
   '@vue/eslint-config-typescript': 12.0.0_vwr2edbge6y4hdavowaaz4l7jq
@@ -874,6 +884,10 @@ packages:
     resolution: {integrity: sha512-u95svzDlTysU5xecFNTgfFG5RUWu1A9P0VzgpcIiGZA9iraHOdSzcxMxQ55DyeRaGCSxQi7LxXDI4rzq/MYfdg==}
     dev: true
 
+  /@types/randomcolor/0.5.8:
+    resolution: {integrity: sha512-hCajbxWpZsGKf6gHiJyEJPCQ6jJaYYcryqtrXNGFnGjreXyws8xCvVln/Gg6ms/AqNntoFHxa2754E7WhpBTEg==}
+    dev: true
+
   /@types/semver/7.5.2:
     resolution: {integrity: sha512-7aqorHYgdNO4DM36stTiGO3DvKoex9TQRwsJU6vMaFGyqpBA1MNZkz+PG3gaNUPpTAOYhT1WR7M1JyA3fbS9Cw==}
     dev: true
@@ -1209,6 +1223,10 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
+  /@yr/monotone-cubic-spline/1.0.3:
+    resolution: {integrity: sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==}
+    dev: false
+
   /@zxing/text-encoding/0.9.0:
     resolution: {integrity: sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==}
     requiresBuild: true
@@ -1283,6 +1301,18 @@ packages:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+
+  /apexcharts/3.44.0:
+    resolution: {integrity: sha512-u7Xzrbcxc2yWznN78Jh5NMCYVAsWDfBjRl5ea++rVzFAqjU2hLz4RgKIFwYOBDRQtW1e/Qz8azJTqIJ1+Vu9Qg==}
+    dependencies:
+      '@yr/monotone-cubic-spline': 1.0.3
+      svg.draggable.js: 2.2.2
+      svg.easing.js: 2.0.0
+      svg.filter.js: 2.0.2
+      svg.pathmorphing.js: 0.1.3
+      svg.resize.js: 1.4.3
+      svg.select.js: 3.0.1
+    dev: false
 
   /arch/2.2.0:
     resolution: {integrity: sha512-Of/R0wqp83cgHozfIYLbBMnej79U/SVGOOyuB3VVFv1NRM/PSFMK12x9KVtiYzJqmnU5WR2qp0Z5rHb7sWGnFQ==}
@@ -3837,6 +3867,10 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
+  /randomcolor/0.6.2:
+    resolution: {integrity: sha512-Mn6TbyYpFgwFuQ8KJKqf3bqqY9O1y37/0jgSK/61PUxV4QfIMv0+K2ioq8DfOjkBslcjwSzRfIDEXfzA9aCx7A==}
+    dev: false
+
   /read-cache/1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
     dependencies:
@@ -4274,6 +4308,60 @@ packages:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
     dev: false
 
+  /svg.draggable.js/2.2.2:
+    resolution: {integrity: sha512-JzNHBc2fLQMzYCZ90KZHN2ohXL0BQJGQimK1kGk6AvSeibuKcIdDX9Kr0dT9+UJ5O8nYA0RB839Lhvk4CY4MZw==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
+  /svg.easing.js/2.0.0:
+    resolution: {integrity: sha512-//ctPdJMGy22YoYGV+3HEfHbm6/69LJUTAqI2/5qBvaNHZ9uUFVC82B0Pl299HzgH13rKrBgi4+XyXXyVWWthA==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
+  /svg.filter.js/2.0.2:
+    resolution: {integrity: sha512-xkGBwU+dKBzqg5PtilaTb0EYPqPfJ9Q6saVldX+5vCRy31P6TlRCP3U9NxH3HEufkKkpNgdTLBJnmhDHeTqAkw==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
+  /svg.js/2.7.1:
+    resolution: {integrity: sha512-ycbxpizEQktk3FYvn/8BH+6/EuWXg7ZpQREJvgacqn46gIddG24tNNe4Son6omdXCnSOaApnpZw6MPCBA1dODA==}
+    dev: false
+
+  /svg.pathmorphing.js/0.1.3:
+    resolution: {integrity: sha512-49HWI9X4XQR/JG1qXkSDV8xViuTLIWm/B/7YuQELV5KMOPtXjiwH4XPJvr/ghEDibmLQ9Oc22dpWpG0vUDDNww==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
+  /svg.resize.js/1.4.3:
+    resolution: {integrity: sha512-9k5sXJuPKp+mVzXNvxz7U0uC9oVMQrrf7cFsETznzUDDm0x8+77dtZkWdMfRlmbkEEYvUn9btKuZ3n41oNA+uw==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+      svg.select.js: 2.1.2
+    dev: false
+
+  /svg.select.js/2.1.2:
+    resolution: {integrity: sha512-tH6ABEyJsAOVAhwcCjF8mw4crjXSI1aa7j2VQR8ZuJ37H2MBUbyeqYr5nEO7sSN3cy9AR9DUwNg0t/962HlDbQ==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
+  /svg.select.js/3.0.1:
+    resolution: {integrity: sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      svg.js: 2.7.1
+    dev: false
+
   /svgo/3.0.2:
     resolution: {integrity: sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==}
     engines: {node: '>=14.0.0'}
@@ -4621,6 +4709,14 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
+  /vue-apexcharts/1.6.2_apexcharts@3.44.0:
+    resolution: {integrity: sha512-9HS3scJwWgKjmkcWIf+ndNDR0WytUJD8Ju0V2ZYcjYtlTLwJAf2SKUlBZaQTkDmwje/zMgulvZRi+MXmi+WkKw==}
+    peerDependencies:
+      apexcharts: ^3.26.0
+    dependencies:
+      apexcharts: 3.44.0
+    dev: false
+
   /vue-demi/0.13.11_vue@3.3.4:
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
     engines: {node: '>=12'}
@@ -4690,6 +4786,16 @@ packages:
       '@vue/runtime-dom': 3.3.4
       '@vue/server-renderer': 3.3.4_vue@3.3.4
       '@vue/shared': 3.3.4
+
+  /vue3-apexcharts/1.4.4_z7yilf4cohxnj355khofvcox6q:
+    resolution: {integrity: sha512-TH89uZrxGjaDvkaYAISvj8+k6Bf1rUKFillc8oJirs5XZEPiwM1ELKZQ786wz0rfPqkSHHny2lqqUCK7Rw+LcQ==}
+    peerDependencies:
+      apexcharts: '> 3.0.0'
+      vue: '> 3.0.0'
+    dependencies:
+      apexcharts: 3.44.0
+      vue: 3.3.4
+    dev: false
 
   /wait-on/7.0.1_debug@4.3.4:
     resolution: {integrity: sha512-9AnJE9qTjRQOlTZIldAaf/da2eW0eSRSgcqq85mXQja/DW3MriHxkpODDSUEg+Gri/rKEcXUZHe+cevvYItaog==}

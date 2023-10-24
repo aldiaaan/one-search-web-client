@@ -28,6 +28,11 @@ const navs = [
         to: "/dashboard/services/document-ranking",
         icon: LayersIcon
       },
+      {
+        title: "Crawling",
+        to: "/dashboard/services/crawling",
+        icon: LayersIcon
+      },
     ]
   },
 ]

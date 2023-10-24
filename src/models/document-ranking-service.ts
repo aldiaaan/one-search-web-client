@@ -15,10 +15,15 @@ export class DocumentRankingService {
     Object.assign(this, args)
   }
 
-  static async start() {
+  static async start(options: { algorithm?: string; useGST?: string } = {}) {
+    const { algorithm = 'tfidf', useGST = false } = options
+
     await request({
       url: Endpoints.DOCUMENT_RANKING_START,
-      params: {},
+      params: {
+        algorithm,
+        use_gst: useGST
+      },
       body: {},
       method: 'POST'
     })

@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<{
         <DialogPanel
           class="fixed z-50 top-1/2 rounded-lg overflow-hidden -translate-y-1/2 left-1/2 max-w-[80vh] -translate-x-1/2 w-[460px]  bg-white">
           <div class="flex flex-col h-full">
-            <div class="bg-blue-600 flex items-center h-32 px-6 text-xl font-semibold tracking-tight text-white">
+            <div class="bg-gray-100 flex items-center h-32 px-6 text-xl font-bold tracking-tight text-gray-700">
               <!-- <div
                 class="flex-shrink-0 text-blue-600 h-8 mb-2 w-8 flex items-center justify-center rounded-lg bg-blue-50">
                 <one-icon name="tool" :height="16" :width="16"></one-icon>

@@ -15,11 +15,13 @@ const props = withDefaults(defineProps<{
   placeholder?: string;
   width?: string | number;
   modelValue?: string | number | string[];
-  isMultiple?: boolean
+  isMultiple?: boolean;
+  label?: string;
 }>(), {
   items: () => [],
   isMultiple: () => false,
-  width: () => '100%'
+  width: () => '100%',
+  label: () => ''
 })
 
 const emits = defineEmits(["update:modelValue"])
@@ -35,13 +37,15 @@ watch(value, () => {
 <template>
   <Listbox :multiple="isMultiple" v-model="value">
     <div class="relative">
+      <div class="text-xs ml-0.5 font-semibold text-gray-700 mb-2 capitalize" v-if="label">{{ label }}</div>
+
       <ListboxButton as="template">
         <slot name="button" :selected="value">
           <div :class="{ '!text-gray-400': !value }"
-            class="w-full flex items-center items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-300 border rounded-md overflow-hidden">
+            class="w-full flex cursor-pointer items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-200 border rounded-md overflow-hidden">
             {{ items.find(item => item.value === value)?.label || placeholder || 'Enter value' }}
             <div class="ml-auto">
-              <ChevronDownIcon class="text-gray-700 w-5 h-5" viewBox="0 0 24 24"  />
+              <ChevronDownIcon class="text-gray-700 w-5 h-5" viewBox="0 0 24 24" />
             </div>
           </div>
         </slot>
