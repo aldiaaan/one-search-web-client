@@ -19,6 +19,17 @@ export class CrawlingService {
     Object.assign(this, args)
   }
 
+  static async getAvaiableCPUs() {
+    const { available_cpus } = await request<{ available_cpus: number }>({
+      url: Endpoints.CRAWLING_SPECS,
+      method: 'GET',
+      params: {},
+      body: {}
+    })
+
+    return available_cpus
+  }
+
   static async start(options: Pick<CrawlingServiceArgs, 'duration' | 'threads'>) {
     await request({
       url: Endpoints.CRAWLING_START,
@@ -53,9 +64,11 @@ export class CrawlingService {
   }
 
   static async status() {
-    const { start_time, status } = await request<{
+    const { start_time, status, duration, threads } = await request<{
       status: 'RUNNING' | 'IDLE'
       start_time: number
+      threads: number
+      duration: number
     }>({
       url: Endpoints.CRAWLING_STATUS,
       params: {},
@@ -65,7 +78,9 @@ export class CrawlingService {
     return {
       service: new CrawlingService({
         startTime: start_time,
-        status
+        status,
+        threads,
+        duration
       })
     }
   }

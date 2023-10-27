@@ -22,5 +22,6 @@ export const Endpoints = Object.freeze({
   CRAWLING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/crawling/metrics',
   CRAWLING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/crawling/status',
   CRAWLING_START: ONE_API_ROOT_URL + '/api/v1.0/crawling/start',
-  CRAWLING_STOP: ONE_API_ROOT_URL + '/api/v1.0/crawling/stop'
+  CRAWLING_STOP: ONE_API_ROOT_URL + '/api/v1.0/crawling/stop',
+  CRAWLING_SPECS: ONE_API_ROOT_URL + '/api/v1.0/crawling/specs'
 })

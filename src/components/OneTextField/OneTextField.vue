@@ -6,7 +6,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<{
-  modelValue?: string;
+  modelValue?: string | number;
   label?: string;
   placeholder?: string;
   fullWidth?: boolean;

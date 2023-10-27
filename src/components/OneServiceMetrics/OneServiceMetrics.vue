@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   status?: boolean;
   isRunning?: boolean;
   isLoading?: boolean;
-  highlights?: { title?: string; value?: string }[]
+  highlights?: { title?: string | number; value?: string | number }[]
 }>(), {
   name: () => "Unknown",
   status: () => false,
@@ -49,7 +49,7 @@ const emits = defineEmits(["update:status", "start", "stop"])
 
     </div>
     <div class="p-4 grid grid-cols-2 gap-4 h-64" v-if="props.isRunning">
-      <div v-for="h in highlights">
+      <div v-for="h in highlights" :key="h.title">
         <p class="text-sm text-gray-500">
           {{ h.title }}
         </p>

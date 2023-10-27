@@ -8,7 +8,7 @@ import { ref, watch } from 'vue';
 const props = withDefaults(defineProps<{
   items?: {
     value: string | number;
-    label?: string;
+    label?: string | number;
     onClick?: () => void;
     variant?: 'normal' | 'danger' | 'success'
   }[];
@@ -17,11 +17,13 @@ const props = withDefaults(defineProps<{
   modelValue?: string | number | string[];
   isMultiple?: boolean;
   label?: string;
+  maxHeight?: string | string
 }>(), {
   items: () => [],
   isMultiple: () => false,
   width: () => '100%',
-  label: () => ''
+  maxWidth: () => 'auto',
+  label: () => '',
 })
 
 const emits = defineEmits(["update:modelValue"])
@@ -42,7 +44,7 @@ watch(value, () => {
       <ListboxButton as="template">
         <slot name="button" :selected="value">
           <div :class="{ '!text-gray-400': !value }"
-            class="w-full flex cursor-pointer items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-200 border rounded-md overflow-hidden">
+            class="w-full flex cursor-pointer items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-300 border rounded-md overflow-hidden">
             {{ items.find(item => item.value === value)?.label || placeholder || 'Enter value' }}
             <div class="ml-auto">
               <ChevronDownIcon class="text-gray-700 w-5 h-5" viewBox="0 0 24 24" />
@@ -53,8 +55,8 @@ watch(value, () => {
 
       <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
         leave-to-class="opacity-0">
-        <ListboxOptions :style="{ 'width': width }"
-          class="z-10 drop-shadow-xl p-2 absolute right-0 mt-2 origin-top-right rounded-md bg-white border border-gray-200 focus:outline-none">
+        <ListboxOptions :style="{ 'width': width, 'max-height': maxHeight }"
+          class="z-10 overflow-auto drop-shadow-xl p-2 absolute right-0 mt-2 origin-top-right rounded-md bg-white border border-gray-200 focus:outline-none">
           <ListboxOption v-slot="{ active, selected }" v-for="item in items" :key="item.value" :value="item.value"
             as="template">
             <slot name="item" :selected="selected" :active="active">
