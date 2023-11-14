@@ -16,7 +16,7 @@ const { data: metrics, isLoading: isLoadingMetrics, isError: isErrorMetrics } = 
   queryFn: PageRankingService.metrics
 })
 
-const { data: status, isLoading: isLoadingStatus, isError: isErrorStatus } = useQuery({
+const { data: status, isLoading: isLoadingStatus, refetch: refetchStatus, isError: isErrorStatus } = useQuery({
   queryKey: ['page-ranking-status'],
   queryFn: PageRankingService.status,
   refetchInterval: 3000
@@ -24,15 +24,23 @@ const { data: status, isLoading: isLoadingStatus, isError: isErrorStatus } = use
 
 const { data: topWebpages, isLoading: isLoadingTopWebpages, isError: isErrorTopWebpages } = useQuery({
   queryKey: ['top-webpages'],
-  queryFn: Webpage.find
+  queryFn: () => {
+    return Webpage.find({
+      sorts: {
+        pagerank: 'DESC'
+      }
+    })
+  }
 })
 
 const { mutate: start, isLoading: isLoadingStart } = useMutation({
-  mutationFn: PageRankingService.start
+  mutationFn: PageRankingService.start,
+  onSettled: () => refetchStatus()
 })
 
 const { mutate: stop, isLoading: isLoadingStop } = useMutation({
-  mutationFn: PageRankingService.stop
+  mutationFn: PageRankingService.stop,
+  onSettled: () => refetchStatus()
 })
 
 const shouldOpenStartDocumentRankingDialog = ref(false)
@@ -77,11 +85,11 @@ const headers = [
 
     <div class="grid grid-cols-3 gap-6">
       <div class="col-span-2 flex flex-col gap-6">
-        <OneServiceMetrics :highlights="[{
+        <OneServiceMetrics :is-stopping="isLoadingStop" :is-error="isErrorStatus" :highlights="[{
           title: 'Iteration',
           value: `${status?.iteration} of ${status?.maxIterations}`
-        }]" @stop="stop" name="Page Ranking Service" :is-running="status?.status === 'RUNNING'"
-          :is-loading="isLoadingStatus" @start="() => shouldOpenStartDocumentRankingDialog = true">
+        }]" @stop="stop" name="Page Ranking Service" :is-running="status?.status === 'RUNNING'" :is-loading="isLoadingStatus"
+          @start="() => shouldOpenStartDocumentRankingDialog = true">
         </OneServiceMetrics>
         <div class="border border-gray-200 rounded-lg  bg-white">
           <div class="flex justify-between items-center h-16 px-6 border-b border-gray-200">

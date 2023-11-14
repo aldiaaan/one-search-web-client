@@ -29,3 +29,7 @@ export const Endpoints = Object.freeze({
   PAGE_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/status',
   PAGE_RANKING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/metrics'
 })
+
+export const ErrorCode = Object.freeze({
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS'
+})

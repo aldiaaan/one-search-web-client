@@ -3,6 +3,7 @@
 import { ref, withDefaults } from 'vue'
 import OneBadge from '../OneBadge';
 import OneCard from '../OneCard';
+import { OneErrorState } from '../OneState'
 
 defineOptions({
   name: "OneServiceMetrics",
@@ -12,13 +13,17 @@ const props = withDefaults(defineProps<{
   name?: string;
   status?: boolean;
   isRunning?: boolean;
+  isError?: boolean;
   isLoading?: boolean;
+  isStopping?: boolean;
   highlights?: { title?: string | number; value?: string | number }[]
 }>(), {
   name: () => "Unknown",
   status: () => false,
   isRunning: () => false,
-  highlights: () => []
+  highlights: () => [],
+  isError: () => false,
+  isStopping: () => false
 })
 
 // watchEffect(() => {
@@ -42,8 +47,8 @@ const emits = defineEmits(["update:status", "start", "stop"])
         </div>
       </div>
       <div class="ml-auto" v-if="props.isRunning">
-        <button @click="emits('stop')">
-          <p class="text-red-600 text-sm font-semibold">Stop</p>
+        <button @click="emits('stop')" :disabled="isStopping">
+          <p :class="{'text-gray-300': isStopping}" class="text-red-600 text-sm font-semibold">{{isStopping ? 'Stopping' : 'Stop'}}</p>
         </button>
       </div>
 
@@ -59,8 +64,13 @@ const emits = defineEmits(["update:status", "start", "stop"])
 
       </div>
     </div>
-    <div class="flex p-4 bg-opacity-50 h-64 items-center justify-center" v-else-if="props.isLoading">
-      <!-- <one-spinner></one-spinner> -->
+    <div class="gap-4 p-4 bg-opacity-50 grid grid-cols-4" v-else-if="props.isLoading">
+      <div  :key="i" v-for="i in 8">
+        <div class="bg-gray-100 h-16 rounded-lg"></div>
+      </div>
+    </div>
+    <div v-else-if="props.isError">
+      <OneErrorState></OneErrorState>
     </div>
     <div v-else class="flex p-4 bg-gray-50 bg-opacity-50 h-64 items-center justify-center">
       <div>

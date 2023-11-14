@@ -1,9 +1,28 @@
 import axios, { type GenericAbortSignal } from 'axios'
-import { ONE_API_ROOT_URL } from './constants'
+import { ErrorCode, ONE_API_ROOT_URL } from './constants'
+import { SnackbarManager } from '@/components/OneSnackbar'
 
 const _axios = axios.create({
   baseURL: ONE_API_ROOT_URL
 })
+
+_axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.data.code === ErrorCode.INVALID_CREDENTIALS) {
+      if (window) {
+        window.location.href = '/login'
+      }
+    }
+    if (error.response.data.code) {
+      SnackbarManager.add({
+        duration: 4000,
+        title: error.response.data.message,
+        variant: 'danger'
+      })
+    }
+  }
+)
 
 export async function request<T>(props: {
   method?: 'POST' | 'GET' | 'DELETE'
@@ -27,8 +46,6 @@ export async function request<T>(props: {
     params: props.params || {},
     headers
   })
-
-  console.log(x)
 
   return x.data as T
 }
