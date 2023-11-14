@@ -9,9 +9,11 @@ import { DocumentRankingService, Webpage, Word } from '@/models';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 import { Endpoints } from '@/api';
 import OneDialog from '@/components/OneDialog';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import OneButton from '@/components/OneButton';
 import OneSelect from '@/components/OneSelect';
+import { useTimer } from '@/composables'
+import { formatElapsedTime } from '@/utils';
 
 const { page, perPage, query } = useQueryOptions({
   perPage: 10
@@ -87,6 +89,11 @@ const headers = [{
 const shouldOpenStartDocumentRankingDialog = ref(false)
 const algorithm = ref('tfidf')
 const useGST = ref('false')
+const startTime = computed(() => documentRankingStatus.value?.service.startTime)
+
+const timer = useTimer({
+  startTime
+})
 
 </script>
 
@@ -129,7 +136,10 @@ const useGST = ref('false')
           :is-loading="isLoadingStartDocumentRanking || isLoadingStopDocumentRanking" name="Document Ranking Service"
           :highlights="[{
             title: 'Algorithm',
-            value: 'TF-IDF'
+            value: documentRankingStatus?.service.algorithm
+          }, {
+            title: 'Time Elapsed',
+            value: formatElapsedTime(timer)
           }]"></OneServiceMetrics>
         <div class="border border-gray-200 rounded-lg  bg-white">
           <div class="flex justify-between items-center h-16 px-6 border-b border-gray-200">

@@ -11,14 +11,16 @@ const props = withDefaults(defineProps<{
   placeholder?: string;
   fullWidth?: boolean;
   spellCheck?: boolean;
-  type?: 'text' | 'password'
+  type?: 'text' | 'password' | 'number';
+  default?: number | string;
 }>(), {
   modelValue: "",
   label: '',
   placeholder: '',
   fullWidth: true,
   spellCheck: false,
-  type: () => 'text'
+  type: () => 'text',
+  default: () => ''
 })
 
 const emits = defineEmits(['update:modelValue'])

@@ -48,7 +48,7 @@ const emits = defineEmits(["update:status", "start", "stop"])
       </div>
 
     </div>
-    <div class="p-4 grid grid-cols-2 gap-4 h-64" v-if="props.isRunning">
+    <div class="p-4 grid grid-cols-2 gap-4" v-if="props.isRunning">
       <div v-for="h in highlights" :key="h.title">
         <p class="text-sm text-gray-500">
           {{ h.title }}
@@ -60,7 +60,7 @@ const emits = defineEmits(["update:status", "start", "stop"])
       </div>
     </div>
     <div class="flex p-4 bg-opacity-50 h-64 items-center justify-center" v-else-if="props.isLoading">
-      <one-spinner></one-spinner>
+      <!-- <one-spinner></one-spinner> -->
     </div>
     <div v-else class="flex p-4 bg-gray-50 bg-opacity-50 h-64 items-center justify-center">
       <div>

@@ -1,6 +1,17 @@
+import * as dayjs from 'dayjs'
+import * as relative from 'dayjs/plugin/relativeTime'
+
+// @ts-ignore
+dayjs.extend(relative)
+// @ts-ignore
+
 export function isDev() {
   return import.meta.env.DEV
 }
+
+export function formatElapsedTime(start: number): string {
+  // @ts-ignore
+  return dayjs.unix(start).fromNow()}
 
 export function formatFileSize(bytes: number = 0, si = false, dp = 1) {
   const thresh = si ? 1000 : 1024

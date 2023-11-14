@@ -32,6 +32,10 @@ const navs = [
         title: "Crawling",
         to: "/dashboard/services/crawling",
         icon: LayersIcon
+      }, {
+        title: "Page Ranking",
+        to: "/dashboard/services/page-ranking",
+        icon: LayersIcon
       },
     ]
   },

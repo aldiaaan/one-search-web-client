@@ -16,6 +16,10 @@ import CrawlingDocumentsView from '@/views/dashboard/crawling/CrawlingDocumentsV
 import CrawlingDomainsView from '@/views/dashboard/crawling/CrawlingDomainsView.vue'
 import CrawlingOverviewView from '@/views/dashboard/crawling/CrawlingOverviewView.vue'
 import CrawlingView from '@/views/dashboard/crawling/CrawlingView.vue'
+import PageRankingView from '@/views/dashboard/page-ranking/PageRankingView.vue'
+import PageRankingSettingsView from '@/views/dashboard/page-ranking/PageRankingSettingsView.vue'
+import PageRankingOverviewView from '@/views/dashboard/page-ranking/PageRankingOverviewView.vue'
+import PageRankingDocumentsView from '@/views/dashboard/page-ranking/PageRankingDocumentsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +73,26 @@ const router = createRouter({
             {
               path: '/dashboard/services/crawling/documents',
               component: CrawlingDocumentsView
+            }
+          ]
+        },
+        {
+          path: '/dashboard/services/page-ranking',
+          name: 'Page Ranking',
+          redirect: '/dashboard/services/page-ranking/overview',
+          component: PageRankingView,
+          children: [
+            {
+              path: '/dashboard/services/page-ranking/overview',
+              component: PageRankingOverviewView
+            },
+            {
+              path: '/dashboard/services/page-ranking/documents',
+              component: PageRankingDocumentsView
+            },
+            {
+              path: '/dashboard/services/page-ranking/settings',
+              component: PageRankingSettingsView
             }
           ]
         },

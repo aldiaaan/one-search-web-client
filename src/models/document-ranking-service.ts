@@ -4,12 +4,15 @@ export type DocumentRankingServiceArgs = {
   id?: string
   startTime?: number
   status?: 'RUNNING' | 'IDLE'
+
+  algorithm?: 'tfidf' | 'inverted-index'
 }
 
 export class DocumentRankingService {
   id?: string
   startTime?: number
   status?: 'RUNNING' | 'IDLE'
+  algorithm?: 'tfidf' | 'inverted-index'
 
   constructor(args?: DocumentRankingServiceArgs) {
     Object.assign(this, args)
@@ -31,9 +34,10 @@ export class DocumentRankingService {
   }
 
   static async status() {
-    const { start_time, status } = await request<{
+    const { start_time, status, algorithm } = await request<{
       status: 'RUNNING' | 'IDLE'
       start_time: number
+      algorithm: 'tfidf' | 'inverted-index'
     }>({
       url: Endpoints.DOCUMENT_RANKING_STATUS,
       params: {},
@@ -43,7 +47,8 @@ export class DocumentRankingService {
     return {
       service: new DocumentRankingService({
         startTime: start_time,
-        status
+        status,
+        algorithm
       })
     }
   }

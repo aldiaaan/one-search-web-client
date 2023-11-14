@@ -23,5 +23,9 @@ export const Endpoints = Object.freeze({
   CRAWLING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/crawling/status',
   CRAWLING_START: ONE_API_ROOT_URL + '/api/v1.0/crawling/start',
   CRAWLING_STOP: ONE_API_ROOT_URL + '/api/v1.0/crawling/stop',
-  CRAWLING_SPECS: ONE_API_ROOT_URL + '/api/v1.0/crawling/specs'
+  CRAWLING_SPECS: ONE_API_ROOT_URL + '/api/v1.0/crawling/specs',
+  PAGE_RANKING_START: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/start',
+  PAGE_RANKING_STOP: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/stop',
+  PAGE_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/status',
+  PAGE_RANKING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/metrics'
 })
