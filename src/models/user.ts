@@ -1,4 +1,5 @@
 import { Endpoints, request } from '@/api'
+import { AUTH_TOKEN_KEY } from '@/constants'
 import type { CommonRequestOptions } from './types'
 import { Pagination } from './pagination'
 
@@ -24,14 +25,44 @@ export class User {
   lastName?: string
   id?: string | number
   role?: 'staff' | 'root'
-
-  AUTH_TOKEN_KEYS = 'user-auth-token'
+  profilePictureUrl?: string
 
   constructor(args: UserArgs) {
     Object.assign(this, args)
   }
 
-  static async getCurrentlyLoggedInUser() {}
+  static signOut() {
+    localStorage.removeItem(AUTH_TOKEN_KEY)
+    if (window) {
+      window.location.href = '/login'
+    }
+  }
+
+  static async me() {
+    const { data } = await request<{
+      data: {
+        email: string
+        first_name: string
+        full_name: string
+        id: number
+        last_name: string
+        role: 'staff' | 'root'
+        profile_picture_url: string
+      }
+    }>({
+      method: 'GET',
+      url: Endpoints.ME
+    })
+
+    return new User({
+      email: data.email,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      fullName: data.full_name,
+      id: data.id,
+      role: data.role
+    })
+  }
 
   async save() {
     await request({
@@ -50,9 +81,7 @@ export class User {
   }
 
   async delete() {
-    console.log('xajdjjiodjasiodhjasoio')
     if (this.id) {
-      
       await request({
         body: {},
         params: {},
@@ -124,7 +153,7 @@ export class User {
       }
     })
     if (data.token) {
-      localStorage.setItem(this.AUTH_TOKEN_KEYS, data.token)
+      localStorage.setItem(AUTH_TOKEN_KEY, data.token)
     }
   }
 }

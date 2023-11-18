@@ -1,5 +1,8 @@
 <script setup lang="ts">
 
+import { User } from '@/models';
+import { useQuery } from '@tanstack/vue-query';
+import OneSidebarAccountBar from './OneSidebarAccountBar.vue'
 import { useLink, useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -17,8 +20,8 @@ defineOptions({
 </script>
 
 <template>
-  <div class="w-[280px] h-full border-r border-gray-200">
-    <div class="px-5 py-4 flex flex-col gap-3">
+  <div class="w-[280px] h-full border-r border-gray-200 flex flex-col">
+    <div class="px-5 py-4 flex flex-col gap-3 flex-1">
 
       <div :key="nav.key" v-for="nav in navs">
         <div class="text-gray-500 font-medium text-sm text-opacity-75 tracking-tight mb-2">{{ nav.title }}</div>
@@ -38,6 +41,7 @@ defineOptions({
         </div>
       </div>
     </div>
+    <!-- <OneSidebarAccountBar></OneSidebarAccountBar> -->
   </div>
 </template>
 

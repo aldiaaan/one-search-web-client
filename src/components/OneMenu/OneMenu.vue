@@ -1,22 +1,26 @@
 <script setup lang="ts">
-
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { isNumber } from '@/utils'
 
 defineOptions({
   name: 'OneMenu'
 })
 
-const props = withDefaults(defineProps<{
-  items?: {
-    key: string | number;
-    label?: string;
-    onClick?: () => void;
-    variant?: 'normal' | 'danger' | 'success'
-  }[]
-}>(), {
-  items: () => []
-})
-
+const props = withDefaults(
+  defineProps<{
+    items?: {
+      key: string | number
+      label?: string
+      onClick?: () => void
+      variant?: 'normal' | 'danger' | 'success'
+    }[]
+    width?: string | number
+  }>(),
+  {
+    items: () => [],
+    width: () => 120
+  }
+)
 </script>
 
 <template>
@@ -24,20 +28,29 @@ const props = withDefaults(defineProps<{
     <MenuButton as="template">
       <slot></slot>
     </MenuButton>
-    <Transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0"
-      enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in"
-      leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
+    <Transition
+      enter-active-class="transition duration-100 ease-out"
+      enter-from-class="transform scale-95 opacity-0"
+      enter-to-class="transform scale-100 opacity-100"
+      leave-active-class="transition duration-75 ease-in"
+      leave-from-class="transform scale-100 opacity-100"
+      leave-to-class="transform scale-95 opacity-0"
+    >
       <MenuItems
-        class="z-10 drop-shadow-xl p-2 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white border border-gray-200 focus:outline-none">
+        :style="{ width: isNumber(props.width) ? `${props.width}px` : props.width }"
+        class="z-50 drop-shadow-xl p-2 absolute right-0 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-md bg-white border border-gray-200 focus:outline-none"
+      >
         <MenuItem v-for="item in items" v-slot="{ active }" :key="item.key">
-        <slot :name="item.key" :active="active">
-          <button class="h-8 text-sm rounded-lg w-full hover:bg-gray-100 px-2 flex items-center" @click="item.onClick">
-            {{ item.label }}
-          </button>
-        </slot>
+          <slot :name="item.key" :active="active">
+            <button
+              class="h-8 text-sm rounded-lg w-full hover:bg-gray-100 px-2 flex items-center"
+              @click="item.onClick"
+            >
+              {{ item.label }}
+            </button>
+          </slot>
         </MenuItem>
       </MenuItems>
     </Transition>
-
   </Menu>
 </template>

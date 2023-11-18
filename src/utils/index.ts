@@ -9,9 +9,14 @@ export function isDev() {
   return import.meta.env.DEV
 }
 
+export function isNumber(value: any) {
+  return typeof value === 'number' && isFinite(value)
+}
+
 export function formatElapsedTime(start: number): string {
   // @ts-ignore
-  return dayjs.unix(start).fromNow()}
+  return dayjs.unix(start).fromNow()
+}
 
 export function formatFileSize(bytes: number = 0, si = false, dp = 1) {
   const thresh = si ? 1000 : 1024

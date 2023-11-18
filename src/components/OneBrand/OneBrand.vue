@@ -14,6 +14,6 @@ const props = withDefaults(defineProps<{
 <template>
   <div class="flex gap-3 items-center">
     <img :src="oneLogo" class="h-8 w-8" />
-    <p class="tracking-tight text-gray-700 font-bold text-3xl ">ONE</p>
+    <p class="tracking-tight text-gray-700 font-bold text-2xl ">ONE</p>
   </div>
 </template>

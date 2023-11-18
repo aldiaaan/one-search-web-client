@@ -8,6 +8,7 @@ export const Endpoints = Object.freeze({
   WEBPAGES: ONE_API_ROOT_URL + '/api/v1.0/webpages/',
   SIGN_IN: ONE_API_ROOT_URL + '/api/v1.0/auth/login',
   USERS: ONE_API_ROOT_URL + '/api/v1.0/accounts/',
+  ME: ONE_API_ROOT_URL + '/api/v1.0/accounts/me',
   DELETE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/<id>/delete/',
   CREATE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/create',
   SEARCH_LOGS: ONE_API_ROOT_URL + '/api/v1.0/analytics/search_logs',

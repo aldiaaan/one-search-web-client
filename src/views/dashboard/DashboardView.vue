@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OneSidebar from '@/components/OneSidebar'
+import OneNavbar from '@/components/OneNavbar'
 import GridIcon from '@/assets/icons/grid.svg'
 import LayersIcon from '@/assets/icons/layers.svg'
 import UserIcon from '@/assets/icons/user.svg'
@@ -44,9 +45,10 @@ const navs = [
 </script>
 
 <template>
-  <div class="h-screen flex">
+  <div class="h-screen flex pt-16">
+    <OneNavbar></OneNavbar>
     <OneSidebar :navs="navs" class="flex-shrink-0" />
-    <div class="flex-1 h-screen bg-gray-50 relative bg-opacity-50">
+    <div class=" bg-gray-50 flex-1 relative bg-opacity-50">
       <div class="w-full h-full overflow-auto">
         <RouterView></RouterView>
       </div>
