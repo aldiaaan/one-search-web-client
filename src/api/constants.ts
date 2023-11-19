@@ -27,7 +27,8 @@ export const Endpoints = Object.freeze({
   PAGE_RANKING_START: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/start',
   PAGE_RANKING_STOP: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/stop',
   PAGE_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/status',
-  PAGE_RANKING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/metrics'
+  PAGE_RANKING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/metrics',
+  SITEMAP_3D: ONE_API_ROOT_URL + '/api/v1.0/sitemap/3d'
 })
 
 export const ErrorCode = Object.freeze({
