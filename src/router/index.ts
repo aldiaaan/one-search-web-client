@@ -21,6 +21,7 @@ import PageRankingSettingsView from '@/views/dashboard/page-ranking/PageRankingS
 import PageRankingOverviewView from '@/views/dashboard/page-ranking/PageRankingOverviewView.vue'
 import PageRankingDocumentsView from '@/views/dashboard/page-ranking/PageRankingDocumentsView.vue'
 import EditProfileView from '@/views/dashboard/EditProfileView.vue'
+import Sitemap3DView from '@/views/Sitemap3DView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,10 @@ const router = createRouter({
       path: '/',
       name: 'WebSearchView',
       component: WebSearchView
+    },
+    {
+      path: '/sitemap/3d',
+      component: Sitemap3DView
     },
     {
       path: '/search',
