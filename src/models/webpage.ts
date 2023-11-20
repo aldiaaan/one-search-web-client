@@ -2,6 +2,8 @@ import { Endpoints, request } from '@/api'
 import type { CommonRequestOptions } from './types'
 import { NotFoundException } from '@/exceptions'
 import { Pagination } from '.'
+import { Facet } from './facet'
+import { getCountryDetailsByCode } from '@/utils'
 
 export type WebpageArgs = {
   id?: string
@@ -13,6 +15,7 @@ export type WebpageArgs = {
   description?: string
   content?: string
   webpage?: string
+  country?: string
 }
 
 export class Webpage {
@@ -25,6 +28,7 @@ export class Webpage {
   title?: string
   description?: string
   image?: string
+  country?: string
 
   constructor(args?: WebpageArgs) {
     Object.assign(this, args)
@@ -33,7 +37,7 @@ export class Webpage {
   static async find(options: CommonRequestOptions<'pagerank'> = {}) {
     const { query = '', perPage = 20, page = 0, sorts = { pagerank: 'DESC' } } = options
 
-    const { data, pagination } = await request<{
+    const { data, pagination, facets } = await request<{
       data: {
         keywords: string[]
         pagerank_score: number
@@ -41,7 +45,14 @@ export class Webpage {
         total_words: number
         url: string
         id: string
+        country: string
       }[]
+      facets: {
+        countries: {
+          value: string | number
+          total: number
+        }[]
+      }
       pagination: {
         current_page: number
         pages: number
@@ -59,12 +70,23 @@ export class Webpage {
     })
 
     return {
+      facets: {
+        countries: facets.countries.map(
+          (c) =>
+            new Facet({
+              ...c,
+              label: getCountryDetailsByCode(c.value as string)?.name || 'Unknown'
+            })
+        )
+      },
       webpages: data.map(
         (d) =>
           new Webpage({
             url: d.url,
             title: d.title,
-            id: d.id
+            id: d.id,
+            pagerankScore: d.pagerank_score,
+            country: d.country
           })
       ),
       pagination: new Pagination({

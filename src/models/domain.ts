@@ -2,6 +2,7 @@ import { Endpoints, request } from '@/api'
 import { DEFAULT_REQUEST_OPTIONS } from './constants'
 import type { CommonRequestOptions } from './types'
 import { Pagination } from '.'
+import { Facet } from './facet'
 
 export type DomainArgs = {
   name?: string
@@ -16,11 +17,11 @@ export class Domain {
     Object.assign(this, args)
   }
 
-  name?: string;
-  id?: string;
-  country?: string = "UNKNOWN";
-  image?: string;
-  totalPages?: number = 0;
+  name?: string
+  id?: string
+  country?: string = 'UNKNOWN'
+  image?: string
+  totalPages?: number = 0
 
   static async find(options: CommonRequestOptions<'totalPages', ''> = {}) {
     const { page = 0, perPage = 10, query = '', sorts = { totalPages: 'DESC' } } = options
@@ -31,6 +32,7 @@ export class Domain {
         name: string
         total_pages: number
       }[]
+     
       pagination: {
         current_page: number
         pages: number
@@ -54,7 +56,7 @@ export class Domain {
         pages: pagination.pages,
         perPage: perPage,
         total: pagination.total
-      }),
+      }),     
       domains: data.map(
         (d) =>
           new Domain({
