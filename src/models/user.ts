@@ -93,6 +93,23 @@ export class User {
     return false
   }
 
+  async update() {
+    if (this.id) {
+      await request({
+        body: {
+          first_name: this.firstName,
+          last_name: this.lastName,
+          email: this.email
+        },
+        params: {},
+        method: 'PUT',
+        url: Endpoints.UPDATE_USER.replace('<id>', `${this.id}`)
+      })
+      return true
+    }
+    return false
+  }
+
   static async find(options: CommonRequestOptions) {
     const { page = 0, perPage = 10, query } = options
 

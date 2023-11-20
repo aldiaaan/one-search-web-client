@@ -25,7 +25,7 @@ _axios.interceptors.response.use(
 )
 
 export async function request<T>(props: {
-  method?: 'POST' | 'GET' | 'DELETE'
+  method?: 'POST' | 'GET' | 'DELETE' | 'PUT'
   body?: any
   url?: string
   params?: any

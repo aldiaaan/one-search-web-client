@@ -10,6 +10,7 @@ export const Endpoints = Object.freeze({
   USERS: ONE_API_ROOT_URL + '/api/v1.0/accounts/',
   ME: ONE_API_ROOT_URL + '/api/v1.0/accounts/me',
   DELETE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/<id>/delete/',
+  UPDATE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/<id>/update/',
   CREATE_USER: ONE_API_ROOT_URL + '/api/v1.0/accounts/create',
   SEARCH_LOGS: ONE_API_ROOT_URL + '/api/v1.0/analytics/search_logs',
   WORDS: ONE_API_ROOT_URL + '/api/v1.0/words/',
