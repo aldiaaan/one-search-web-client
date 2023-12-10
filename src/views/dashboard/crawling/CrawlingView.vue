@@ -7,11 +7,11 @@ const tabs = [{
   key: "/dashboard/services/crawling/overview",
   label: "Overview",
 },
-{
-  href: "/dashboard/services/crawling/documents",
-  key: "/dashboard/services/crawling/documents",
-  label: "Documents",
-},
+// {
+//   href: "/dashboard/services/crawling/documents",
+//   key: "/dashboard/services/crawling/documents",
+//   label: "Documents",
+// },
 {
   href: "/dashboard/services/crawling/domains",
   key: "/dashboard/services/crawling/domains",

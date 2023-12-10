@@ -55,11 +55,16 @@ watch(value, () => {
         <slot name="button" :selected="value">
           <div
             :class="{ '!text-gray-400': !value }"
-            class="w-full truncate text-ellipsis flex cursor-pointer items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-300 border rounded-md overflow-hidden"
+            class="w-full truncate text-ellipsis flex cursor-pointer items-center text-sm focus-within:border-gray-700 transition-colors px-3 h-10 border-gray-300 border rounded-md overflow-hidden"
           >
             {{
               isMultiple
-                ? items.filter((item) => (value as string[]).includes(item.value as string) )?.label || placeholder || 'Enter value'
+                ? items
+                    .filter((item) => (value as string[]).includes(`${item.value}`))
+                    .map((x) => x.label)
+                    .join(', ') ||
+                  placeholder ||
+                  'Enter value'
                 : items.find((item) => item.value === value)?.label || placeholder || 'Enter value'
             }}
             <div class="ml-auto">

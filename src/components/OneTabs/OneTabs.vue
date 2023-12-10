@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
     label?: string;
     key: string;
     href?: string;
+    keepQuery?: boolean
   }[]
 }>(), {
   tabs: () => []
@@ -24,7 +25,10 @@ defineOptions({
   <div class="flex">
     <div :key="tab.key" role="button" @click="() => {
       if (tab.href) {
-        router.push(tab.href)
+        router.push({
+          path: tab.href,
+          query: router.currentRoute.value.query
+        })
       }
     }" v-for="tab in props.tabs" :to="tab.href" :class="{
   'font-semibold text-gray-900': useLink({

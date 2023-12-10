@@ -34,8 +34,8 @@ export class Webpage {
     Object.assign(this, args)
   }
 
-  static async find(options: CommonRequestOptions<'pagerank'> = {}) {
-    const { query = '', perPage = 20, page = 0, sorts = { pagerank: 'DESC' } } = options
+  static async find(options: CommonRequestOptions<'pagerank'> & { countries?: string[] } = {}) {
+    const { query = '', perPage = 20, page = 0, sorts = { pagerank: 'DESC' }, countries } = options
 
     const { data, pagination, facets } = await request<{
       data: {
@@ -65,7 +65,8 @@ export class Webpage {
         query: query,
         limit: perPage,
         start: page * perPage,
-        sort_pagerank_score: sorts?.pagerank
+        sort_pagerank_score: sorts?.pagerank,
+        countries
       }
     })
 

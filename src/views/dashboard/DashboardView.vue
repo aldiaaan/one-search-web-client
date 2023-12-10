@@ -3,6 +3,7 @@ import OneSidebar from '@/components/OneSidebar'
 import OneNavbar from '@/components/OneNavbar'
 import GridIcon from '@/assets/icons/grid.svg'
 import LayersIcon from '@/assets/icons/layers.svg'
+import FileText from '@/assets/icons/file-text.svg'
 import UserIcon from '@/assets/icons/user.svg'
 import { RouterView } from 'vue-router'
 
@@ -12,13 +13,18 @@ const navs = [
     routes: [
       {
         title: "Overview",
-        to: "/dashboard",
+        to: "/dashboard/overview",
         icon: GridIcon
       },
       {
         title: "Staff",
         to: "/dashboard/staff",
         icon: UserIcon
+      },
+      {
+        title: "Documents",
+        to: "/dashboard/documents/list",
+        icon: FileText
       },
     ]
   }, {

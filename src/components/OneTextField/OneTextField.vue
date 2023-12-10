@@ -33,7 +33,7 @@ const emits = defineEmits(['update:modelValue'])
   <div :class="{ 'w-full': fullWidth }">
     <div class="text-xs font-semibold text-gray-700 mb-2 capitalize" v-if="label">{{ label }}</div>
     <div
-      class="w-full bg-white flex text-black-900 items-center text-sm focus-within:border-gray-700 transition-colors px-3 py-2 border-gray-300 border rounded-md overflow-hidden"
+      class="w-full bg-white flex text-black-900 items-center text-sm focus-within:border-gray-700 transition-colors px-3 h-10 border-gray-300 border rounded-md overflow-hidden"
       :class="{'bg-gray-500': theme === 'dark'}"
       >
       <div class="flex-shrink-0" :class="{'mr-2': $slots['icon']}">

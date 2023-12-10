@@ -21,11 +21,15 @@ const { mutate: signin, isLoading: isLoadingSignIn } = useMutation({
   }
 })
 
+function handleSubmit() {
+  signin(new User({ email: email.value, password: password.value }))
+}
+
 </script>
 
 <template>
   <div class="h-screen">
-    <form @submit.prevent="() => signin(new User({ email, password }))"
+    <form @submit.prevent="handleSubmit"
       class="container w-[420px] mx-auto sm:px-0 pt-16 px-8 py-4">
       <OneBrand class="mb-12">
       </OneBrand>

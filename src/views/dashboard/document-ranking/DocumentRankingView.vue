@@ -7,11 +7,11 @@ const tabs = [{
   key: "/dashboard/services/document-ranking/overview",
   label: "Overview",
 },
-{
-  href: "/dashboard/services/document-ranking/documents",
-  key: "/dashboard/services/document-ranking/documents",
-  label: "Documents",
-},
+// {
+//   href: "/dashboard/services/document-ranking/documents",
+//   key: "/dashboard/services/document-ranking/documents",
+//   label: "Documents",
+// },
 {
   href: "/dashboard/services/document-ranking/search-logs",
 

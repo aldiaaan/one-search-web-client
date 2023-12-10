@@ -27,7 +27,7 @@ const { data, isLoading, isError } = useQuery({
       countries: countries.value
     })
   },
-  queryKey: [page, perPage, query, 'documents', countries],
+  queryKey: [page, perPage, query, 'documents', countries]
 })
 
 const headers = [
@@ -56,7 +56,7 @@ const ac = computed(() => data.value?.facets.countries)
 </script>
 
 <template>
-  <div class="container mx-auto px-8 flex flex-col gap-6">
+  <div class="container mx-auto px-8 flex flex-col gap-6 py-10">
     <OneCard>
       <template #actions>
         <div class="w-60">

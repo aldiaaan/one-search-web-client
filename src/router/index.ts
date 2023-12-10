@@ -22,6 +22,8 @@ import PageRankingOverviewView from '@/views/dashboard/page-ranking/PageRankingO
 import PageRankingDocumentsView from '@/views/dashboard/page-ranking/PageRankingDocumentsView.vue'
 import EditProfileView from '@/views/dashboard/EditProfileView.vue'
 import Sitemap3DView from '@/views/Sitemap3DView.vue'
+import DashboardOverviewView from '@/views/dashboard/DashboardOverview.vue'
+import DocumentListView from '@/views/dashboard/DocumentListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,9 +49,18 @@ const router = createRouter({
     },
     {
       path: '/dashboard',
-      name: 'DashbaordView',
+      name: 'DashboardView',
       component: DashboardView,
+      redirect: '/dashboard/overview',
       children: [
+        {
+          path: '/dashboard/overview',
+          component: DashboardOverviewView
+        },
+        {
+          path: '/dashboard/documents/list',
+          component: DocumentListView
+        },
         {
           path: '/dashboard/profile/edit',
           component: EditProfileView

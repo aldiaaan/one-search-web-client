@@ -1,6 +1,6 @@
 import { isDev } from '@/utils'
 
-export const ONE_API_ROOT_URL = isDev() ? 'http://localhost:8080' : 'https://localhost:8080'
+export const ONE_API_ROOT_URL = isDev() ? 'http://localhost:8080' : 'http://localhost:8880'
 
 export const Endpoints = Object.freeze({
   DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains/',
@@ -30,7 +30,8 @@ export const Endpoints = Object.freeze({
   PAGE_RANKING_STOP: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/stop',
   PAGE_RANKING_STATUS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/status',
   PAGE_RANKING_METRICS: ONE_API_ROOT_URL + '/api/v1.0/page_ranking/metrics',
-  SITEMAP_3D: ONE_API_ROOT_URL + '/api/v1.0/sitemap/3d'
+  SITEMAP_3D: ONE_API_ROOT_URL + '/api/v1.0/sitemap/3d',
+  EVENT_ANALYTICS_SEARCH: ONE_API_ROOT_URL + '/api/v1.0/analytics/events/search/'
 })
 
 export const ErrorCode = Object.freeze({

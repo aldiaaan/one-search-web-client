@@ -4,7 +4,7 @@ import OneSearchInput from '@/components/OneSearchInput'
 import OneTabs from '@/components/OneTabs'
 import OnePagination from '@/components/OnePagination'
 import { useRequest, useQueryOptions } from '@/composables'
-import { Webpage } from '@/models'
+import { AnalyticsService, Webpage } from '@/models'
 import { computed, onMounted, onUpdated, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -13,7 +13,10 @@ defineOptions({
 })
 
 const { page, perPage, query } = useQueryOptions()
-const searchRequest = useRequest(Webpage.overallSimilaritySearch)
+const searchRequest = useRequest((args) => {
+  AnalyticsService.trackQuery(query.value)
+  return Webpage.overallSimilaritySearch(args)
+})
 const router = useRouter()
 
 onMounted(() => {
@@ -44,7 +47,8 @@ const tabs = [
   {
     key: 'sitemap-3d',
     href: '/sitemap/3d',
-    label: 'Sitemap'
+    label: 'Sitemap',
+    keepQuery: true
   }
 ]
 </script>

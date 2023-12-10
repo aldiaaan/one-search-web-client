@@ -2,22 +2,37 @@
 import ForceGraph3D from '3d-force-graph'
 import { Endpoints } from '@/api'
 import { onMounted, ref, type Ref } from 'vue'
-import { useQueryOptions } from '@/composables'
+import { useQueryOptions, useRefQuery } from '@/composables'
 import { useRoute, useRouter } from 'vue-router'
 import OneTextField from '@/components/OneTextField'
 import OneSelect from '@/components/OneSelect'
 import qs from 'qs'
+import OneNavbar from '@/components/OneNavbar'
+import { useQuery } from '@tanstack/vue-query'
+import { Webpage } from '@/models'
 
 const route = useRoute()
 const query = ref(route.query.query as string)
-const countries = ref(
-  Array.isArray(route.query['countries[]'])
-    ? route.query['countries[]']
-    : [route.query['countries[]']]
-) as Ref<string[]>
+const countries = useRefQuery<string[]>('countries[]', [])
 
 const router = useRouter()
 const $graph = ref<any>(null)
+
+const {
+  data: webpages,
+  isLoading,
+  isError
+} = useQuery({
+  queryFn: async () => {
+    return Webpage.find({
+      page: 0,
+      perPage: 1,
+      query: query.value,
+      countries: countries.value
+    })
+  },
+  queryKey: [query, 'documents', countries]
+})
 
 onMounted(() => {
   const graph = ForceGraph3D()
@@ -64,50 +79,45 @@ function refreshGraph() {
     )
   }
 }
-
-const availableCountries = [
-  {
-    value: 'ID',
-    label: 'Indonesia'
-  },
-  {
-    value: 'US',
-    label: 'United States'
-  }
-]
 </script>
 
 <template>
   <div class="h-screen" id="3d-sitemap"></div>
   <div class="absolute left-0 top-0 right-0 flex justify-end bg-transparent">
     <div class="px-4 py-4 flex justify-end">
-      <form
-        class="flex gap-4"
-        @submit.prevent="
-          () => {
-            router.replace({
-              path: '/sitemap/3d',
-              query: {
-                query,
-                'countries[]': countries
+      <OneNavbar>
+        <template #actions>
+          <form
+            class="flex gap-4"
+            @submit.prevent="
+              () => {
+                router.replace({
+                  path: '/sitemap/3d',
+                  query: {
+                    query,
+                    'countries[]': countries
+                  }
+                })
+                refreshGraph()
               }
-            })
-            refreshGraph()
-          }
-        "
-      >
-        <div class="w-56">
-          <OneTextField v-model="query"></OneTextField>
-        </div>
-        <div class="w-48">
-          <OneSelect
-            :is-multiple="true"
-            class="bg-white"
-            v-model="countries"
-            :items="availableCountries"
-          ></OneSelect>
-        </div>
-      </form>
+            "
+          >
+            <div class="w-56">
+              <OneTextField v-model="query"></OneTextField>
+            </div>
+            <div>
+              <OneSelect
+                placeholder="Select countries"
+                width="320px"
+                :is-multiple="true"
+                class="bg-white"
+                v-model="countries"
+                :items="webpages?.facets.countries || []"
+              ></OneSelect>
+            </div>
+          </form>
+        </template>
+      </OneNavbar>
     </div>
   </div>
 </template>

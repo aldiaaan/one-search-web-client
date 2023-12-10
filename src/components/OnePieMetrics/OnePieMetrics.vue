@@ -77,11 +77,11 @@ const options = {
     <template #header>
       Domains by Country
     </template>
-    <div class="flex gap-4 px-6">
-      <div class="my-4 h-[320px] w-[320px] flex items-center justify-center">
+    <div class="flex gap-4 px-6 pb-6">
+      <!-- <div class="my-4 h-[320px] w-[320px] flex items-center justify-center">
         <ApexChart :width="280" :height="280" :options="options" class="h-[120px]" :series="Object.values(data)"
           type="donut"></ApexChart>
-      </div>
+      </div> -->
       <div class="flex-1 flex flex-col pt-6 gap-3">
         <OneProgressBar v-for="key in Object.keys(data)" :key="key" :title="key"
           :max="Object.values(data).reduce((acc, val) => acc + val, 0)" :current="data[key]">

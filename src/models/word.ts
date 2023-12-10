@@ -135,7 +135,7 @@ export class Word {
     const { page = 0, perPage = 20, query, resolves, sorts } = options
 
     const { data, pagination } = await request<{
-      data: { id: string; ip: string; ua: string; query: string }[]
+      data: { id: string; ip: string; ua: string; query: string; created_at: string }[]
       pagination: {
         total: number
         pages: number
@@ -158,7 +158,7 @@ export class Word {
         total: pagination.total,
         pages: pagination.pages
       }),
-      words: data.map((d) => ({ ...d, value: d.query }))
+      words: data.map((d) => ({ ...d, value: d.query, date: d.created_at }))
     }
   }
 }

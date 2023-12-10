@@ -26,37 +26,39 @@ const { data: user } = useQuery({
     <div class="flex items-center font-semibold text-xl text-gray-700 tracking-tight">
       Dashboard
     </div>
-    <div class="ml-auto">
-      <OneMenu
-        width="100%"
-        :items="[
-          {
-            key: 'logout',
-            label: 'Log Out',
-            onClick: () => {
-              User.signOut()
-              client.clear()
+    <div class="ml-auto flex items-center">
+      <slot name="actions">
+        <OneMenu
+          width="100%"
+          :items="[
+            {
+              key: 'logout',
+              label: 'Log Out',
+              onClick: () => {
+                User.signOut()
+                client.clear()
+              }
             }
-          }
-        ]"
-      >
-        <div class="flex h-16 w-52 items-center flex-shrink-0 cursor-pointer">
-          <div class="flex-shrink-0 mr-4">
-            <div class="w-9 h-9 bg-gray-200 rounded-full"></div>
-          </div>
-          <div class="flex-col flex-1">
-            <div class="text-sm font-semibold">
-              {{ user?.fullName }}
+          ]"
+        >
+          <div class="flex h-16 w-52 items-center flex-shrink-0 cursor-pointer">
+            <div class="flex-shrink-0 mr-4">
+              <div class="w-9 h-9 bg-gray-200 rounded-full"></div>
             </div>
-            <div class="text-xs text-gray-500">
-              {{ user?.email }}
+            <div class="flex-col flex-1">
+              <div class="text-sm font-semibold">
+                {{ user?.fullName }}
+              </div>
+              <div class="text-xs text-gray-500">
+                {{ user?.email }}
+              </div>
+            </div>
+            <div class="flex-shrink-0">
+              <OneChevronUp class="h-5 w-5" viewBox="0 0 24 24"></OneChevronUp>
             </div>
           </div>
-          <div class="flex-shrink-0">
-            <OneChevronUp class="h-5 w-5" viewBox="0 0 24 24"></OneChevronUp>
-          </div>
-        </div>
-      </OneMenu>
+        </OneMenu>
+      </slot>
     </div>
   </div>
 </template>

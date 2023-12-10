@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs'
 import * as relative from 'dayjs/plugin/relativeTime'
 
 // @ts-ignore
-dayjs.extend(relative)
+// dayjs.extend(relative)
 // @ts-ignore
 
 export function isDev() {
@@ -41,6 +41,11 @@ export function formatFileSize(bytes: number = 0, si = false, dp = 1) {
 
 export function formatNumber(n: number = 0): string {
   return n.toLocaleString('en-US')
+}
+
+export function isNumeric(n: string) {
+  // @ts-ignore
+  return !isNaN(parseFloat(n)) && isFinite(n)
 }
 
 export * from './countries'
