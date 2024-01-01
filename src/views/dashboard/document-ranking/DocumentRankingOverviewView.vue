@@ -13,7 +13,6 @@ import { computed, ref } from 'vue';
 import OneButton from '@/components/OneButton';
 import OneSelect from '@/components/OneSelect';
 import { useTimer } from '@/composables'
-import { formatElapsedTime } from '@/utils';
 
 const { page, perPage, query } = useQueryOptions({
   perPage: 10
@@ -91,9 +90,6 @@ const algorithm = ref('tfidf')
 const useGST = ref('false')
 const startTime = computed(() => documentRankingStatus.value?.service.startTime)
 
-const timer = useTimer({
-  startTime
-})
 
 </script>
 
@@ -139,7 +135,7 @@ const timer = useTimer({
             value: documentRankingStatus?.service.algorithm
           }, {
             title: 'Time Elapsed',
-            value: formatElapsedTime(timer)
+            value: '????'
           }]"></OneServiceMetrics>
         <div class="border border-gray-200 rounded-lg  bg-white">
           <div class="flex justify-between items-center h-16 px-6 border-b border-gray-200">
