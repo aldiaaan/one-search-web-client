@@ -9,7 +9,14 @@ export default function useRefQuery<T>(name: string, defaultValue: any) {
   //   ? parseFloat(route.query[name] as string)
   //   : (route.query[name] as string)
 
-  const value = ref(route.query[name] || defaultValue)
+  let v = route.query[name] || defaultValue
+
+  if (!Array.isArray(v) && name.includes("[]")) {
+    
+    v = [v]
+  }
+
+  const value = ref(v)
 
   watch(value, () => {
     router.replace({

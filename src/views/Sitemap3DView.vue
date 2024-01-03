@@ -10,10 +10,12 @@ import qs from 'qs'
 import OneNavbar from '@/components/OneNavbar'
 import { useQuery } from '@tanstack/vue-query'
 import { Webpage } from '@/models'
+import type { Facet } from '@/models/facet'
 
 const route = useRoute()
 const query = ref(route.query.query as string)
 const countries = useRefQuery<string[]>('countries[]', [])
+const availableCountries = ref<Facet[]>([])
 
 const router = useRouter()
 const $graph = ref<any>(null)
@@ -31,6 +33,11 @@ const {
       countries: countries.value
     })
   },
+  onSuccess: (data) => {
+    // console.log(data)
+    availableCountries.value = data.facets.countries
+  },
+  staleTime: Infinity,
   queryKey: [query, 'documents', countries]
 })
 
@@ -72,10 +79,13 @@ onMounted(() => {
 function refreshGraph() {
   if ($graph.value) {
     $graph.value.jsonUrl(
-      `${Endpoints.SITEMAP_3D}?${qs.stringify({
-        query: query.value,
-        countries: countries.value
-      })}`
+      `${Endpoints.SITEMAP_3D}?${qs.stringify(
+        {
+          query: query.value,
+          'countries[]': countries.value
+        },
+        { indices: false }
+      )}`
     )
   }
 }
@@ -112,7 +122,7 @@ function refreshGraph() {
                 :is-multiple="true"
                 class="bg-white"
                 v-model="countries"
-                :items="webpages?.facets.countries || []"
+                :items="availableCountries || []"
               ></OneSelect>
             </div>
           </form>

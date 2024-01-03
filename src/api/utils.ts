@@ -47,6 +47,8 @@ export async function request<T>(props: {
     headers
   })
 
+  console.log(x)
+
   return x.data as T
 }
 

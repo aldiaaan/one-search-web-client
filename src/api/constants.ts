@@ -1,6 +1,6 @@
 import { isDev } from '@/utils'
 
-export const ONE_API_ROOT_URL = 'http://103.166.156.127"'
+export const ONE_API_ROOT_URL = 'http://localhost:8080'
 
 export const Endpoints = Object.freeze({
   DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains/',

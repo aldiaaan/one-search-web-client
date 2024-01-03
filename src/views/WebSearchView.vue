@@ -59,10 +59,10 @@ const isLoadingWebpages = computed(() => webpageRequest.isLoading.value)
               class="flex justify-between items-baseline px-4 pt-4 pb-4 mb-4 border-b border-gray-200"
             >
               <p class="font-semibold text-xl tracking-tight">Top Webpage</p>
-              <OneLink to="/webpages">
+              <!-- <OneLink to="/webpages">
                 More
                 <ChevronRightIcon width="20" height="20" viewBox="0 0 24 24" />
-              </OneLink>
+              </OneLink> -->
             </div>
             <div class="flex flex-col h-full gap-6 my-4">
               <div class="flex px-4 gap-4" :key="webpage.url" v-for="webpage in webpages">
@@ -94,10 +94,10 @@ const isLoadingWebpages = computed(() => webpageRequest.isLoading.value)
               class="flex justify-between items-baseline px-4 pt-4 pb-4 border-b border-gray-200"
             >
               <p class="font-semibold text-xl tracking-tight">Top Domain</p>
-              <OneLink to="/webpages">
+              <!-- <OneLink to="/webpages">
                 More
                 <ChevronRightIcon width="20" height="20" viewBox="0 0 24 24" />
-              </OneLink>
+              </OneLink> -->
             </div>
             <div class="flex flex-col flex-1 gap-4 my-4">
               <div class="flex items-center px-4" :key="domain.id" v-for="domain in domains">
