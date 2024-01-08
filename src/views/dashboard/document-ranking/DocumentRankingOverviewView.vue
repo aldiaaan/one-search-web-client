@@ -4,7 +4,7 @@ import OneTable from '@/components/OneTable';
 import OneImage from '@/components/OneImage';
 import OneCard from '@/components/OneCard';
 import OneServiceMetrics from '@/components/OneServiceMetrics';
-import { useQueryOptions } from '@/composables';
+import { useQueryOptions, useRefQuery } from '@/composables';
 import { DocumentRankingService, Webpage, Word } from '@/models';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 import { Endpoints } from '@/api';
@@ -14,20 +14,16 @@ import OneButton from '@/components/OneButton';
 import OneSelect from '@/components/OneSelect';
 import { useTimer } from '@/composables'
 
-const { page, perPage, query } = useQueryOptions({
-  perPage: 10
-})
-
 
 const { data, isLoading, isError } = useQuery({
   queryFn: async () => {
     return Word.getMostSearchedWords({
-      page: page.value,
-      perPage: perPage.value,
-      query: query.value
+      page: 0,
+      perPage: 10,
+      query: ''
     })
   },
-  queryKey: [page, perPage, query, 'most-searched']
+  queryKey: ['most-searched']
 })
 
 const { mutate: startDocumentRanking, isLoading: isLoadingStartDocumentRanking, isError: isErrorDocumentRanking } = useMutation({
@@ -65,7 +61,7 @@ const { mutate: stopDocumentRanking, isLoading: isLoadingStopDocumentRanking, is
   }
 })
 
-const { data: documentRankingStatus, isLoading: isLoadingStartDocumentRankingStatus, isError: isErrorDocumentRankingStatus, refetch: refetchDocumentRankingStatus } = useQuery({
+const { data: documentRankingStatus, isLoading: isLoadingDocumentRankingStatus, isError: isErrorDocumentRankingStatus, refetch: refetchDocumentRankingStatus } = useQuery({
   queryFn: () => {
     return DocumentRankingService.status()
   },
@@ -127,9 +123,8 @@ const startTime = computed(() => documentRankingStatus.value?.service.startTime)
 
     <div class="grid grid-cols-3 gap-6">
       <div class="col-span-2 flex flex-col gap-6">
-        <OneServiceMetrics @stop="stopDocumentRanking" :is-running="documentRankingStatus?.service.status === 'RUNNING'"
-          @start="() => shouldOpenStartDocumentRankingDialog = true"
-          :is-loading="isLoadingStartDocumentRanking || isLoadingStopDocumentRanking" name="Document Ranking Service"
+        <OneServiceMetrics :is-loading="isLoadingDocumentRankingStatus" :is-stopping="isLoadingStopDocumentRanking" @stop="stopDocumentRanking" :is-running="documentRankingStatus?.service.status === 'RUNNING'"
+          @start="() => shouldOpenStartDocumentRankingDialog = true" name="Document Ranking Service"
           :highlights="[{
             title: 'Algorithm',
             value: documentRankingStatus?.service.algorithm
@@ -147,7 +142,7 @@ const startTime = computed(() => documentRankingStatus.value?.service.startTime)
           </div>
           <div class="flex flex-col flex-1 gap-4">
             <OneTable :is-loading="isLoading" :headers="headers"
-              :items="data?.words.map((h, index) => ({ ...h, index: (perPage * page) + index + 1 }))"></OneTable>
+              :items="data?.words.map((h, index) => ({ ...h, index: index + 1 }))"></OneTable>
           </div>
         </div>
         <OneCard>

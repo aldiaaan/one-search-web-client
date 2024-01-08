@@ -14,16 +14,19 @@ const navs = [
       {
         title: "Overview",
         to: "/dashboard/overview",
+        name: "DashboardOverviewView",
         icon: GridIcon
       },
       {
         title: "Staff",
         to: "/dashboard/staff",
+        name: "DashboardStaffListView",
         icon: UserIcon
       },
       {
         title: "Documents",
         to: "/dashboard/documents/list",
+        name: "DocumentListView",
         icon: FileText
       },
     ]
@@ -33,16 +36,19 @@ const navs = [
       {
         title: "Document Ranking",
         to: "/dashboard/services/document-ranking",
-        icon: LayersIcon
+        icon: LayersIcon,
+        name: 'DocumentRankingView'
       },
       {
         title: "Crawling",
         to: "/dashboard/services/crawling",
-        icon: LayersIcon
+        icon: LayersIcon,
+        name: 'CrawlingView'
       }, {
         title: "Page Ranking",
         to: "/dashboard/services/page-ranking",
-        icon: LayersIcon
+        icon: LayersIcon,
+        name: 'PageRankingView'
       },
     ]
   },
@@ -54,10 +60,8 @@ const navs = [
   <div class="h-screen flex pt-16">
     <OneNavbar></OneNavbar>
     <OneSidebar :navs="navs" class="flex-shrink-0" />
-    <div class=" bg-gray-50 flex-1 relative bg-opacity-50">
-      <div class="w-full h-full overflow-auto">
-        <RouterView></RouterView>
-      </div>
+    <div class=" bg-gray-50 flex-1 overflow-auto relative bg-opacity-50">
+      <RouterView></RouterView>
     </div>
   </div>
 </template>

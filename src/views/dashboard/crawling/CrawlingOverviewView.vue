@@ -80,7 +80,7 @@ const { mutate: stop, isLoading: isLoadingStop } = useMutation({
 
     <div class="grid grid-cols-3 gap-6">
       <div class="col-span-2 flex flex-col gap-6">
-        <OneServiceMetrics :highlights="[{ title: 'Threads', value: status?.service.threads }]"
+        <OneServiceMetrics :is-loading="isLoadingStatus" :is-stopping="isLoadingStop" :highlights="[{ title: 'Threads', value: status?.service.threads }]"
           :is-running="status?.service.status === 'RUNNING'" @stop="stop"
           @start="() => shouldOpenStartServiceDialog = true" name="Crawling Service">
         </OneServiceMetrics>

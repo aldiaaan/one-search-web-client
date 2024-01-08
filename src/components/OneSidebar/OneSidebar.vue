@@ -8,7 +8,7 @@ import { useLink, useRouter } from 'vue-router'
 const router = useRouter()
 
 const props = withDefaults(defineProps<{
-  navs?: { title?: string, key?: string, routes?: { key?: string; title?: string; to: string; icon: any }[] }[]
+  navs?: { title?: string, key?: string, routes?: { key?: string; title?: string; to: string; icon: any; name: string }[] }[]
 }>(), {
   navs: () => []
 })
@@ -27,7 +27,7 @@ defineOptions({
         <div class="text-gray-500 font-medium text-sm text-opacity-75 tracking-tight mb-2">{{ nav.title }}</div>
         <div class="flex flex-col gap-1">
           <div v-for="route in nav.routes" :key="route.key" role="button" @click="router.push({
-            path: route.to
+            name: route.name
           })" class="flex items-center py-2 px-3 rounded-lg" :class="{
   'bg-gray-100': useLink({
     to: route.to

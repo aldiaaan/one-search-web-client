@@ -58,21 +58,24 @@ const isLoadingWebpages = computed(() => webpageRequest.isLoading.value)
             <div
               class="flex justify-between items-baseline px-4 pt-4 pb-4 mb-4 border-b border-gray-200"
             >
-              <p class="font-semibold text-xl tracking-tight">Top Webpage</p>
+              <p class="font-semibold text-lg tracking-tight">Top Webpages</p>
               <!-- <OneLink to="/webpages">
                 More
                 <ChevronRightIcon width="20" height="20" viewBox="0 0 24 24" />
               </OneLink> -->
             </div>
-            <div class="flex flex-col h-full gap-6 my-4">
-              <div class="flex px-4 gap-4" :key="webpage.url" v-for="webpage in webpages">
+            <div class="flex flex-col h-full gap-6 my-4" v-if="!isLoadingWebpages">
+              <a
+                :href="webpage.url"
+                target="_blank"
+                class="flex px-4 gap-4"
+                :key="webpage.url"
+                v-for="webpage in webpages"
+              >
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center mb-2">
                     <div class="w-3 h-3 overflow-hidden mr-2">
-                      <img
-                        class="w-full h-full object-cover"
-                        src="https://kumparan.com/favicon.ico"
-                      />
+                      <OneImage class="w-full h-full object-cover" :src="webpage.image" />
                     </div>
                     <div class="text-xs text-gray-500 truncate text-ellipsis">
                       {{ webpage.url }}
@@ -86,18 +89,38 @@ const isLoadingWebpages = computed(() => webpageRequest.isLoading.value)
                   <OneImage class="flex-shrink-0 rounded-lg overflow-hidden" :src="webpage.image">
                   </OneImage>
                 </div>
+              </a>
+            </div>
+            <div class="flex flex-col h-full gap-6 my-4" v-else>
+              <div class="flex px-4 gap-4" :key="i" v-for="i in 5">
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center mb-2">
+                    <div class="w-3 h-3 overflow-hidden mr-2 bg-gray-100 animate-pulse"></div>
+                    <div
+                      class="text-xs text-gray-500 truncate text-ellipsis h-3 bg-gray-100 w-48"
+                    ></div>
+                  </div>
+                  <div
+                    class="text-xs text-gray-500 truncate text-ellipsis h-4 mt-1 bg-gray-100 w-72"
+                  ></div>
+                  
+                  <div
+                    class="text-xs text-gray-500 truncate text-ellipsis h-4 mt-1 bg-gray-100 w-36"
+                  ></div>
+                </div>
+                <div class="h-20 w-20 bg-gray-100 animate-pulse rounded-md"></div>
               </div>
             </div>
           </div>
-          <div class="border border-gray-200 rounded-lg bg-white">
+          <!-- <div class="border border-gray-200 rounded-lg bg-white">
             <div
               class="flex justify-between items-baseline px-4 pt-4 pb-4 border-b border-gray-200"
             >
               <p class="font-semibold text-xl tracking-tight">Top Domain</p>
-              <!-- <OneLink to="/webpages">
+              <OneLink to="/webpages">
                 More
                 <ChevronRightIcon width="20" height="20" viewBox="0 0 24 24" />
-              </OneLink> -->
+              </OneLink>
             </div>
             <div class="flex flex-col flex-1 gap-4 my-4">
               <div class="flex items-center px-4" :key="domain.id" v-for="domain in domains">
@@ -119,7 +142,7 @@ const isLoadingWebpages = computed(() => webpageRequest.isLoading.value)
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- <div role="button" class="hover:cursor-pointer rounded-lg   bg-gray-900 relative p-4">
             <p class="absolute bottom-6 left-6 text-white font-semibold text-3xl">
               Explore Sitemap

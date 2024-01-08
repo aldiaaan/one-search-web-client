@@ -11,10 +11,8 @@ export default function useRefQuery<T>(name: string, defaultValue: any) {
 
   let v = route.query[name] || defaultValue
 
-  if (!Array.isArray(v) && name.includes("[]")) {
-    
-    v = [v]
-  }
+  if (!Array.isArray(v) && name.includes("[]")) v = [v]
+  
 
   const value = ref(v)
 

@@ -16,7 +16,7 @@ const { mutate: signin, isLoading: isLoadingSignIn } = useMutation({
   mutationFn: async (user: User) => {
     await user.signin()
     router.push({
-      path: '/dashboard'
+      name: 'DashboardView'
     })
   }
 })

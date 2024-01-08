@@ -33,9 +33,6 @@ export class User {
 
   static signOut() {
     localStorage.removeItem(AUTH_TOKEN_KEY)
-    if (window) {
-      window.location.href = '/login'
-    }
   }
 
   static async me() {

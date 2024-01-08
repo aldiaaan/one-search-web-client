@@ -124,7 +124,7 @@ const ac = computed(() => data.value?.facets.countries)
             @click="
               () =>
                 router.push({
-                  path: '/dashboard/documents',
+                  path: 'DocumentDetailView',
                   query: {
                     url: item.url
                   }

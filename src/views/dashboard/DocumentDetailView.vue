@@ -7,15 +7,6 @@ import OnePageContent from '@/components/OnePageContent';
 import OneTabs from '@/components/OneTabs';
 import { useRoute } from 'vue-router';
 
-
-const tabs = [
-  {
-    key: 'Overview',
-    label: 'Overview',
-    href: '/dashboard/documents/overview'
-  }
-]
-
 const route = useRoute()
 
 const url = route.query.url

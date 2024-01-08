@@ -12,9 +12,14 @@ import { useQuery } from '@tanstack/vue-query'
 import { useRouter } from 'vue-router'
 import { useRefQuery } from '@/composables'
 import { computed, ref } from 'vue'
+import type { Facet } from '@/models/facet'
 
-const { page, perPage, query } = useQueryOptions()
+// const { page, perPage, query } = useQueryOptions()
+const perPage = useRefQuery<number>('perPage', 25)
+const query = useRefQuery<string>('query', '' as string)
+const page = useRefQuery<number>('page', 0)
 const countries = useRefQuery<string[]>('countries[]', [] as string[])
+const availableCountries = ref<Facet[]>([])
 
 const router = useRouter()
 
@@ -27,6 +32,9 @@ const { data, isLoading, isError } = useQuery({
       countries: countries.value
     })
   },
+  onSuccess: (d) => {
+    availableCountries.value = d.facets?.countries || []
+  },
   queryKey: [page, perPage, query, 'documents', countries]
 })
 
@@ -38,7 +46,7 @@ const headers = [
   },
   {
     key: 'url',
-    title: 'URL'
+    title: 'URL',
   },
   {
     key: 'pagerankScore',
@@ -52,7 +60,7 @@ const headers = [
   }
 ]
 
-const ac = computed(() => data.value?.facets.countries)
+const webpages = computed(() => data.value?.webpages || [])
 </script>
 
 <template>
@@ -104,19 +112,20 @@ const ac = computed(() => data.value?.facets.countries)
           </template>
         </OneSelect>
         <OneSelect
+          :is-loading="isLoading"
           placeholder="Select Country"
           :width="'240px'"
-          :items="data?.facets.countries || []"
+          :items="availableCountries"
           v-model="countries"
           :is-multiple="true"
         >
         </OneSelect>
       </template>
-      <OneTable
+      <OneTable        
         :cell-height="64"
         :headers="headers"
         :is-loading="isLoading"
-        :items="data?.webpages"
+        :items="webpages"
       >
         <template #url="{ item }: { item: Webpage }">
           <div
@@ -124,7 +133,7 @@ const ac = computed(() => data.value?.facets.countries)
             @click="
               () =>
                 router.push({
-                  path: '/dashboard/documents',
+                  name: 'DocumentDetailView',
                   query: {
                     url: item.url
                   }

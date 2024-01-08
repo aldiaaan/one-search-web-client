@@ -13,6 +13,7 @@ import { ref, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
+    isLoading?: boolean
     items?: {
       value: string | number
       label?: string | number
@@ -27,6 +28,7 @@ const props = withDefaults(
     maxHeight?: string | string
   }>(),
   {
+    isLoading: () => false,
     items: () => [],
     isMultiple: () => false,
     width: () => '100%',
@@ -80,6 +82,7 @@ watch(value, () => {
         leave-to-class="opacity-0"
       >
         <ListboxOptions
+          v-if="!isLoading"
           :style="{ width: width, 'max-height': maxHeight }"
           class="z-10 overflow-auto drop-shadow-xl p-2 absolute right-0 mt-2 origin-top-right rounded-md bg-white border border-gray-200 focus:outline-none"
         >
@@ -103,6 +106,15 @@ watch(value, () => {
               </button>
             </slot>
           </ListboxOption>
+        </ListboxOptions>
+        <ListboxOptions
+          v-else
+          :style="{ width: width, 'max-height': maxHeight }"
+          class="z-10 flex flex-col gap-4 overflow-auto drop-shadow-xl px-2 py-4 absolute right-0 mt-2 origin-top-right rounded-md bg-white border border-gray-200 focus:outline-none"
+        >
+          <div class="h-5 px-2 flex items-center" :key="i" v-for="i in 8">
+            <div class="bg-gray-100 animate-pulse h-full rounded-md w-full"></div>
+          </div>
         </ListboxOptions>
       </transition>
     </div>

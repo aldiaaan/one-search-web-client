@@ -25,133 +25,145 @@ import Sitemap3DView from '@/views/Sitemap3DView.vue'
 import DashboardOverviewView from '@/views/dashboard/DashboardOverview.vue'
 import DocumentListView from '@/views/dashboard/DocumentListView.vue'
 
+const prefix = `${
+  import.meta.env.VITE_WEB_CLIENT_URL_PREFIX && '/' + import.meta.env.VITE_WEB_CLIENT_URL_PREFIX
+}`
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: prefix + '/',
       name: 'WebSearchView',
       component: WebSearchView
     },
     {
-      path: '/sitemap/3d',
-      component: Sitemap3DView
+      path: prefix + '/sitemap/3d',
+      component: Sitemap3DView,
+      name: 'Sitemap3DView'
     },
     {
-      path: '/search',
+      path: prefix + '/search',
       name: 'WebSearchResultView',
       component: WebSearchResultView
     },
     {
-      path: '/login',
+      path: prefix + '/login',
       name: 'StaffLoginView',
       component: StaffLoginView
     },
     {
-      path: '/dashboard',
+      path: prefix + '/dashboard',
       name: 'DashboardView',
       component: DashboardView,
-      redirect: '/dashboard/overview',
+      redirect: prefix + '/dashboard/overview',
       children: [
         {
-          path: '/dashboard/overview',
-          component: DashboardOverviewView
+          path: prefix + '/dashboard/overview',
+          component: DashboardOverviewView,
+          name: 'DashboardOverviewView'
         },
         {
-          path: '/dashboard/documents/list',
-          component: DocumentListView
+          path: prefix + '/dashboard/documents/list',
+          component: DocumentListView,
+          name: 'DocumentListView'
         },
         {
-          path: '/dashboard/profile/edit',
-          component: EditProfileView
+          path: prefix + '/dashboard/profile/edit',
+          component: EditProfileView,
+          name: 'EditProfileView'
         },
         {
-          path: '/dashboard/documents',
-          component: DocumentDetailView
+          path: prefix + '/dashboard/documents',
+          component: DocumentDetailView,
+          name: 'DocumentDetailView'
         },
         {
-          path: '/dashboard/words',
-          component: WordDetailView
+          path: prefix + '/dashboard/words',
+          component: WordDetailView,
+          name: 'WordDetailView'
         },
         {
-          path: '/dashboard/words',
-          component: WordDetailView
-        },
-        {
-          path: '/dashboard/services/crawling',
-          name: 'Crawling',
-          redirect: '/dashboard/services/crawling/overview',
+          path: prefix + '/dashboard/services/crawling',
+          name: 'CrawlingView',
+          redirect: prefix + '/dashboard/services/crawling/overview',
           component: CrawlingView,
           children: [
             {
-              path: '/dashboard/services/crawling/overview',
-              component: CrawlingOverviewView
+              path: prefix + '/dashboard/services/crawling/overview',
+              component: CrawlingOverviewView,
+              name: 'CrawlingOverviewView'
             },
             {
-              path: '/dashboard/services/crawling/domains',
-              component: CrawlingDomainsView
+              path: prefix + '/dashboard/services/crawling/domains',
+              component: CrawlingDomainsView,
+              name: 'CrawlingDomainsView'
             },
             {
-              path: '/dashboard/services/crawling/documents',
-              component: CrawlingDocumentsView
+              path: prefix + '/dashboard/services/crawling/documents',
+              component: CrawlingDocumentsView,
+              name: 'CrawlingDocumentsView'
             }
           ]
         },
         {
-          path: '/dashboard/services/page-ranking',
-          name: 'Page Ranking',
-          redirect: '/dashboard/services/page-ranking/overview',
+          path: prefix + '/dashboard/services/page-ranking',
+          name: 'PageRankingView',
+          redirect: prefix + '/dashboard/services/page-ranking/overview',
           component: PageRankingView,
           children: [
             {
-              path: '/dashboard/services/page-ranking/overview',
-              component: PageRankingOverviewView
+              path: prefix + '/dashboard/services/page-ranking/overview',
+              component: PageRankingOverviewView,
+              name: 'PageRankingOverviewView'
             },
             {
-              path: '/dashboard/services/page-ranking/documents',
-              component: PageRankingDocumentsView
+              path: prefix + '/dashboard/services/page-ranking/documents',
+              component: PageRankingDocumentsView,
+              name: 'PageRankingDocumentsView'
             },
             {
-              path: '/dashboard/services/page-ranking/settings',
-              component: PageRankingSettingsView
+              path: prefix + '/dashboard/services/page-ranking/settings',
+              component: PageRankingSettingsView,
+              name: 'PageRankingSettingsView'
             }
           ]
         },
         {
-          path: '/dashboard/services/document-ranking',
-          name: 'DocumentRanking',
-          redirect: '/dashboard/services/document-ranking/overview',
+          path: prefix + '/dashboard/services/document-ranking',
+          name: 'DocumentRankingView',
+          redirect: prefix + '/dashboard/services/document-ranking/overview',
           component: DocumentRankingView,
           children: [
             {
               component: DocumentRankingOverviewView,
               name: 'DocumentRankingOverviewView',
-              path: '/dashboard/services/document-ranking/overview'
+              path: prefix + '/dashboard/services/document-ranking/overview'
             },
             {
               component: DocumentRankingSearchLogs,
-              name: 'DocumentRankingSearchLogs',
-              path: '/dashboard/services/document-ranking/search-logs'
+              name: 'DocumentRankingSearchLogsView',
+              path: prefix + '/dashboard/services/document-ranking/search-logs'
             },
             {
               component: DocumentRankingDocumentsView,
               name: 'DocumentRankingDocumentsView',
-              path: '/dashboard/services/document-ranking/documents'
+              path: prefix + '/dashboard/services/document-ranking/documents'
             },
             {
               component: DocumentRankingWordsView,
               name: 'DocumentRankingWordsView',
-              path: '/dashboard/services/document-ranking/words'
+              path: prefix + '/dashboard/services/document-ranking/words'
             }
           ]
         },
         {
-          path: '/dashboard/staff',
+          path: prefix + '/dashboard/staff',
           name: 'DashboardStaffListView',
           component: DashboardStaffListView
         },
         {
-          path: '/dashboard/staff/add',
+          path: prefix + '/dashboard/staff/add',
           name: 'AddStaffView',
           component: AddStaffView
         }

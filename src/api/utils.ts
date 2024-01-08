@@ -11,7 +11,7 @@ _axios.interceptors.response.use(
   (error) => {
     if (error.response.data.code === ErrorCode.INVALID_CREDENTIALS) {
       if (window) {
-        window.location.href = '/login'
+        window.location.href = `/${import.meta.env.VITE_WEB_CLIENT_URL_PREFIX}`
       }
     }
     if (error.response.data.code) {
@@ -46,9 +46,7 @@ export async function request<T>(props: {
     params: props.params || {},
     headers
   })
-
-  console.log(x)
-
+  
   return x.data as T
 }
 

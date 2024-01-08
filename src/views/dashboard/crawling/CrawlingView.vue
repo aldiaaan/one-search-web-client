@@ -6,16 +6,13 @@ const tabs = [{
   href: "/dashboard/services/crawling/overview",
   key: "/dashboard/services/crawling/overview",
   label: "Overview",
+  name: 'CrawlingView'
 },
-// {
-//   href: "/dashboard/services/crawling/documents",
-//   key: "/dashboard/services/crawling/documents",
-//   label: "Documents",
-// },
 {
   href: "/dashboard/services/crawling/domains",
   key: "/dashboard/services/crawling/domains",
   label: "Domains",
+  name: 'CrawlingDomainsView'
 }]
 
 </script>

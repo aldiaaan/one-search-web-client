@@ -1,11 +1,11 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-export default function useQueryOptions(data: { perPage?: number } = { perPage: 20 }) {
+export default function useQueryOptions(data: { perPage?: number } = { perPage: 25 }) {
   const route = useRoute()
 
   const page = ref(parseInt((route.query.page as string) || '0'))
-  const perPage = ref(data.perPage || 20)
+  const perPage = ref(data.perPage)
   const query = ref(route.query.query as string)
 
   const router = useRouter()

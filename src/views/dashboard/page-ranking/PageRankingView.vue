@@ -1,23 +1,14 @@
 <script setup lang="ts">
-import OneTabs from '@/components/OneTabs';
+import OneTabs from '@/components/OneTabs'
 
-
-const tabs = [{
-  href: "/dashboard/services/page-ranking/overview",
-  key: "/dashboard/services/page-ranking/overview",
-  label: "Overview",
-},
-// {
-//   href: "/dashboard/services/page-ranking/documents",
-//   key: "/dashboard/services/page-ranking/documents",
-//   label: "Documents",
-// },
-{
-  href: "/dashboard/services/page-ranking/settings",
-  key: "/dashboard/services/page-ranking/settings",
-  label: "Settings",
-}]
-
+const tabs = [
+  {
+    href: '/dashboard/services/page-ranking/overview',
+    key: '/dashboard/services/page-ranking/overview',
+    label: 'Overview',
+    name: 'PageRankingOverviewView'
+  }
+]
 </script>
 
 <template>

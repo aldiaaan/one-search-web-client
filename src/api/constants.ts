@@ -1,6 +1,6 @@
 import { isDev } from '@/utils'
 
-export const ONE_API_ROOT_URL = 'http://localhost:8080'
+export const ONE_API_ROOT_URL = import.meta.env.VITE_SEARCH_ENGINE_API_HOST
 
 export const Endpoints = Object.freeze({
   DOMAINS: ONE_API_ROOT_URL + '/api/v1.0/domains/',

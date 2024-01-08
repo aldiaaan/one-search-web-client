@@ -39,7 +39,7 @@ const headers = [{
       <OneTable :cell-height="64" :headers="headers" :is-loading="isLoading" :items="data?.webpages">
         <template #url="{ item }: { item: Webpage }">
           <div role="button" @click="() => router.push({
-            path: '/dashboard/documents',
+            name: 'DocumentDetailView',
             query: {
               url: item.url
             }

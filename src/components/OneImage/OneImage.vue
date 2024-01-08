@@ -27,7 +27,7 @@ onMounted(() => {
 <template>
   <div class="h-full w-full">
     <div v-if="isError" class="h-full w-full flex items-center justify-center bg-gray-200">
-      <BrokenImageIcon class="text-gray-500" />
+      <!-- <BrokenImageIcon class="text-gray-500" /> -->
     </div>
     <div v-if="isLoading" class="h-full w-full bg-gray-200 animate-pulse" />
     <img ref="image" v-if="!isError" :src="props.src" class="h-full w-full"

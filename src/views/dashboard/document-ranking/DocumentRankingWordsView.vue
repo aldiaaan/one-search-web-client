@@ -83,7 +83,7 @@ const headers = [{
 
         <template #value="{ item }">
           <div role="button" @click="() => router.push({
-            path: `/dashboard/words`,
+            name: 'WordDetailView',
             query: {
               word: item.value
             }

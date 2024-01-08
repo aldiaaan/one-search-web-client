@@ -17,6 +17,9 @@ const { data: user } = useQuery({
   queryKey: ['user'],
   queryFn: User.me
 })
+
+const router = useRouter()
+
 </script>
 
 <template>
@@ -37,6 +40,9 @@ const { data: user } = useQuery({
               onClick: () => {
                 User.signOut()
                 client.clear()
+                router.push({
+                  name: 'StaffLoginView'
+                })
               }
             }
           ]"

@@ -6,6 +6,7 @@ const tabs = [{
   href: "/dashboard/services/document-ranking/overview",
   key: "/dashboard/services/document-ranking/overview",
   label: "Overview",
+  name: 'DocumentRankingOverviewView'
 },
 // {
 //   href: "/dashboard/services/document-ranking/documents",
@@ -17,17 +18,14 @@ const tabs = [{
 
   key: "/dashboard/services/document-ranking/search-logs",
   label: "Search Log",
+  name: 'DocumentRankingSearchLogsView'
 },
 
 {
   href: "/dashboard/services/document-ranking/words",
   key: "/dashboard/services/document-ranking/words",
   label: "Words",
-},
-{
-  href: "/dashboard/services/document-ranking/settings",
-  key: "/dashboard/services/document-ranking/settings",
-  label: "Settings",
+  name: 'DocumentRankingWordsView'
 }]
 
 </script>

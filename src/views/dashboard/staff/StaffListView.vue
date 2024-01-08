@@ -80,7 +80,7 @@ const { mutate: remove } = useMutation({
           <p class="font-semibold text-lg tracking-tight">Staff</p>
         </div>
         <OneButton @click="() => router.push({
-          path: '/dashboard/staff/add'
+          name: 'AddStaffView'
         })" class="h-9">Create New Staff</OneButton>
       </div>
       <div class="py-3 flex gap-3 justify-end px-3 border-b border-gray-200">

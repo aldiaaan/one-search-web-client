@@ -3,7 +3,7 @@ import oneSearchLogo from '@/assets/one-search-engine.png'
 import OneSearchInput from '@/components/OneSearchInput'
 import OneTabs from '@/components/OneTabs'
 import OnePagination from '@/components/OnePagination'
-import { useRequest, useQueryOptions } from '@/composables'
+import { useRequest, useQueryOptions, useScrollToTop } from '@/composables'
 import { AnalyticsService, Webpage } from '@/models'
 import { computed, onMounted, onUpdated, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -17,7 +17,10 @@ const searchRequest = useRequest((args) => {
   AnalyticsService.trackQuery(query.value)
   return Webpage.overallSimilaritySearch(args)
 })
+
 const router = useRouter()
+
+const scrollToTop = useScrollToTop()
 
 onMounted(() => {
   searchRequest.exec({
@@ -33,6 +36,7 @@ watch(page, () => {
     perPage: perPage.value,
     query: query.value
   })
+  scrollToTop()
 })
 
 const webpages = computed(() => searchRequest.result.value?.webpages || [])
@@ -42,12 +46,14 @@ const tabs = [
   {
     key: 'result',
     href: '/search',
-    label: 'Result'
+    label: 'Result',
+    name: 'WebSearchResultView'
   },
   {
     key: 'sitemap-3d',
     href: '/sitemap/3d',
     label: 'Sitemap',
+    name: 'Sitemap3DView',
     keepQuery: true
   }
 ]
@@ -90,6 +96,9 @@ const tabs = [
   </div>
   <div class="container my-6 mx-auto">
     <div class="ml-28 flex flex-col gap-8" v-if="!isLoadingWebpages">
+      <div>
+        <p class="text-sm text-gray-500">Found {{ pagination?.total }} results.</p>
+      </div>
       <a
         :href="webpage.url"
         target="_blank"
@@ -119,7 +128,9 @@ const tabs = [
       <OnePagination :pages="pagination?.pages" v-model="page">
         <template #button="{ isActive, index }: { isActive: boolean; index: number }">
           <button
-            @click="() => (page = index)"
+            @click="() => {
+              page = index
+            }"
             :class="{ 'bg-gray-200 text-gray-900 font-semibold': isActive }"
             class="text-gray-500 text-sm h-10 w-10 flex items-center justify-center hover:bg-gray-200 transition-colors rounded-full cursor-pointer"
           >
